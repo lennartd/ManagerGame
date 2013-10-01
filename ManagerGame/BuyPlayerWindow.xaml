@@ -1,0 +1,117 @@
+﻿<Window x:Class="BuyPlayerWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:local="clr-namespace:ManagerGame"
+    Title="Spieler kaufen" Height="600" Width="1039.5">
+
+    <Window.Resources>
+        <local:SalaryToEuroConverter x:Key="SalaryEuroConv"/>
+        <local:WeightToKilogrammConverter x:Key="WeightKilogrammConv"/>
+        <local:SizeToCentimeterConverter x:Key="SizeCentimeterConv"/>
+        <local:SelectedItemToVisibilityConverter x:Key="SelectedItemVisibilityConv"/>
+        <local:DoubleToIntegerEuroConverter x:Key="DoubleIntegerEuroConv"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="290*"/>
+            <RowDefinition Height="201*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Name="grdRow1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="105*"/>
+                <ColumnDefinition Width="67*"/>
+            </Grid.ColumnDefinitions>
+
+            <ComboBox Name="cmbbxChooseSelection" Margin="5" >
+                <ComboBoxItem Name="cmbbxitemAllplayer" Selected="cmbbxitemAllPlayers_Selected">Alle Spieler</ComboBoxItem>
+                <ComboBoxItem Name="cmbbxitemAvailablePlayers" Selected="cmbbxitemAvailablePlayers_Selected">Verfügbare Spieler</ComboBoxItem>
+            </ComboBox>
+            
+            <Button Name="btnStartTransfer" Click="btnStartTransfer_Click" Grid.Column="1" Margin="5" Content="Verhandlungen beginnen" Visibility="{Binding SelectedItem, Converter={StaticResource SelectedItemVisibilityConv}}"></Button>
+        </Grid>
+
+        <Grid Name="grdRow2" Grid.Row="1">
+        <ListView Name="lstvwPlayers" ItemsSource="{Binding Players}">
+            <ListView.View>
+                <GridView>
+
+                    <GridViewColumn Width="150" Header="Spieler"
+                                    DisplayMemberBinding="{Binding}"/>
+                    <GridViewColumn Width="75" Header="Geburtstag"
+                                    DisplayMemberBinding="{Binding Path=PlayerBirthday}"/>
+                    <GridViewColumn Width="100" Header="Nationalität"
+                                    DisplayMemberBinding="{Binding Path=PlayerNationality}"/>
+                    <GridViewColumn Width="50" Header="Größe"
+                                    DisplayMemberBinding="{Binding Path=PlayerSize, Converter={StaticResource SizeCentimeterConv}}"/>
+                    <GridViewColumn Width="50" Header="Gewicht"
+                                    DisplayMemberBinding="{Binding Path=PlayerWeight, Converter={StaticResource WeightKilogrammConv}}"/>
+                    <GridViewColumn Width="50" Header="Position"
+                                    DisplayMemberBinding="{Binding Path=PlayerPosition}"/>
+                    <GridViewColumn Width="75" Header="2. Position"
+                                    DisplayMemberBinding="{Binding Path=PlayerSecondPosition}"/>
+                    <GridViewColumn Width="50" Header="Wertung"
+                                    DisplayMemberBinding="{Binding Path=PlayerRating}"/>
+                    <GridViewColumn Width="200" Header="Team"
+                                    DisplayMemberBinding="{Binding Path=PlayerCurrentTeam}"/>
+                    <GridViewColumn Width="75" Header="Gehalt"
+                                    DisplayMemberBinding="{Binding Path=PlayerSalary, Converter={StaticResource SalaryEuroConv}}"/>
+                    <GridViewColumn Width="75" Header="Vertrag bis"
+                                    DisplayMemberBinding="{Binding Path=PlayerContractUntil}"/>
+                    <GridViewColumn Width="60" Header="Angebote"
+                                    DisplayMemberBinding="{Binding Path=PlayerOffers.Offers.Count}"/>
+
+                    </GridView>
+            </ListView.View>
+        </ListView>
+        </Grid>
+
+        <Grid Name="grdRow3" Grid.Row="2" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="5">Name:</Label>
+                <Label Name="lblName" Margin=" 0,5,5,5" Content="{Binding SelectedValue}"></Label>
+                <Label Margin="200,5,5,5">Status:</Label>
+                <Label Name="lblStatus" Margin="0,5,5,5" Content="{Binding}"></Label>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Name="stckpnlRedemption" Orientation="Horizontal">
+                <Label Margin="5">Ablösesumme:</Label>
+                <Slider Name="sldrRedemption" Maximum="100000" Minimum="500" SmallChange="10" TickFrequency="10" LargeChange="100" Width="300" VerticalAlignment="Center"/>
+                <TextBox Name="txtbxRedemptionValue" Text="{Binding Value, Converter={StaticResource DoubleIntegerEuroConv}}"></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <Label Margin="5">Gehalt::</Label>
+                <Slider Name="sldrSalary" Maximum="20000" Minimum="500" SmallChange="10" TickFrequency="10" LargeChange="100" Width="300" VerticalAlignment="Center"></Slider>
+                <TextBox Name="txtbxSalaryValue" Text="{Binding Value, Converter={StaticResource DoubleIntegerEuroConv}}"></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                <Label Margin="5">Vertragsdauer bis:</Label>
+                <TextBox Name="txtbxContractUntil" Margin="5"></TextBox>
+            </StackPanel>
+            
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Name="btnBack" Click="btnBack_Click" Content="Zurück" Margin="10" HorizontalAlignment="Left"></Button>
+                <Button Grid.Column="1" Name="btnMakeOffer" Click="btnMakeOffer_Click" Content="Angebot unterbreiten" Margin="10" HorizontalAlignment="Right"></Button>
+            </Grid>
+
+        </Grid>
+        
+    </Grid>
+</Window>

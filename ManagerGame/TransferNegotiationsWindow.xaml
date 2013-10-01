@@ -1,0 +1,62 @@
+﻿<Window x:Class="TransferNegotiationsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:local="clr-namespace:ManagerGame"
+    Title="Laufende Transferverhandlungen" Height="300" Width="1154">
+
+    <Window.Resources>
+        <local:PlayerCurrentTeamToDirectionConverter x:Key="PlayerCurrentTeamDirectionConv"/>
+        <local:StatusIntegerToStringConverter x:Key="StatusIntegerStringConv"/>
+        <local:SalaryToEuroConverter x:Key="SalaryEuroConv"/>
+        <local:SelectedItemToVisibilityConverter x:Key="SelectedItemVisibilityConv"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="204*"/>
+            <RowDefinition Height="67*"/>
+        </Grid.RowDefinitions>
+
+
+
+        <ListView Name="lstvwPlayers" ItemsSource="{Binding Offers}" Grid.RowSpan="2">
+            <ListView.View>
+                <GridView>
+
+                    <GridViewColumn Width="70" Header="Datum"
+                                    DisplayMemberBinding="{Binding OfferMadeDate}"/>
+                    <GridViewColumn Width="150" Header="Spieler"
+                                    DisplayMemberBinding="{Binding OfferPlayerName}"/>
+                    <GridViewColumn Width="200" Header="Derzeitiges Team"
+                                    DisplayMemberBinding="{Binding OfferCurrentTeamName}"/>
+                    <GridViewColumn Width="200" Header="Angebot von"
+                                    DisplayMemberBinding="{Binding OfferBiddingTeam}"/>
+                    <GridViewColumn Width="75" Header="Richtung"
+                                    DisplayMemberBinding="{Binding OfferCurrentTeamName, 
+                        Converter={StaticResource PlayerCurrentTeamDirectionConv}}"/>
+                    <GridViewColumn Width="200" Header="Status"
+                                    DisplayMemberBinding="{Binding OfferStatus, 
+                        Converter={StaticResource StatusIntegerStringConv}}"/>
+                    <GridViewColumn Width="60" Header="Ablöse"
+                                    DisplayMemberBinding="{Binding OfferRedemption, 
+                        Converter={StaticResource SalaryEuroConv}}"/>
+                    <GridViewColumn Width="60" Header="Gehalt"
+                                    DisplayMemberBinding="{Binding OfferSalary, 
+                        Converter={StaticResource SalaryEuroConv}}"/>
+                    <GridViewColumn Width="100" Header="Vertagsdauer bis"
+                                    DisplayMemberBinding="{Binding OfferContractUntil}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Name="stckpnlWorkOntransfers" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center"
+                    Visibility="{Binding SelectedItem, Converter={StaticResource SelectedItemVisibilityConv}}">
+            
+            <Label Margin="10" VerticalAlignment="Center">Transferbehandlung bearbeiten:</Label>
+            <ComboBox Name="cmbbxSelectMethods" ItemsSource="{Binding}"  Width="200" Margin="10" VerticalAlignment="Center"></ComboBox>
+            <TextBox Name="txtbxNewValue" Width="50" Margin="20"></TextBox>
+            <Button Name="btnSend" Click="btnSend_Click" Width="100" Margin="10" VerticalAlignment="Center">Absenden</Button>
+        </StackPanel>
+        
+    </Grid>
+</Window>

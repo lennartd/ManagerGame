@@ -1,0 +1,17 @@
+﻿<Window x:Class="MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="BBL Manager Spiel" Height="99.541" Width="525">
+    <Grid>
+       
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="btnNewgame" Click="btnNewGame_Click">Neues Spiel</Button>
+            <Button Name="btnLoadGame" Click="btnLoadGame_Click" Grid.Column="1">Spiel laden</Button>
+        </Grid>
+       
+    </Grid>
+</Window>

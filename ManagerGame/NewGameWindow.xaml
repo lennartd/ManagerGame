@@ -1,0 +1,20 @@
+﻿<Window x:Class="NewGameWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Neues Spiel" Height="134" Width="354">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="12*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label VerticalAlignment="Center" Margin="0,16,0,15"  >Team wählen:</Label>
+        <ComboBox Name="cmbbxSelectTeam" Grid.Column="1" ItemsSource="{Binding Teams}" Margin="10" ></ComboBox>
+        
+        <Button Name="btnStartNewGame" Click="btnStartNewGame_Click" Grid.Row="1" Grid.ColumnSpan="2" Margin="5">Spiel starten</Button>
+    </Grid>
+</Window>

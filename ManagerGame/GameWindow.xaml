@@ -1,0 +1,184 @@
+﻿<Window x:Class="GameWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:local="clr-namespace:ManagerGame"
+    Title="BBl Manager Spiel" Height="694" Width="1211.825">
+    
+    <Window.Resources>
+        <local:SalaryToEuroConverter x:Key="SalaryEuroConv"/>
+        <local:WeightToKilogrammConverter x:Key="WeightKilogrammConv"/>
+        <local:SizeToCentimeterConverter x:Key="SizeCentimeterConv"/>
+        <local:TeamCoachTobtnReleaseCoachContentConverter x:Key="TeamCoachbtnReleaseCoachContentConv"/>
+        <local:GamesToFontWeightConverter x:Key="GamesFontWeightConv"/>
+        <local:GameOpponentToImageSourceConverter x:Key="GameOpponentImageConv"/>
+        <local:DateConverter x:Key="DateConv"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="149*"/>
+            <RowDefinition Height="17*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="283*"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="171*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Label HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16">Rotation</Label>
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Label VerticalAlignment="Center">Minuten zu vergeben:</Label>
+                    <Label Name="lblRemainingMinutes" Content="{Binding RotationRemainingMinutes, FallbackValue=0}" VerticalAlignment="Center"></Label>
+                </StackPanel>
+                
+            </Grid>
+            
+            
+            <ListView Grid.Row="2" ItemsSource="{Binding Players}" Name="lstvwRotation">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="25" Header="#"
+                                    DisplayMemberBinding="{Binding Path=PlayerRotationNumber}"/>
+                    <GridViewColumn Width="150" Header="Spieler" />
+                    <GridViewColumn Width="75" Header="Geburtstag"
+                                    DisplayMemberBinding="{Binding Path=PlayerBirthday}"/>
+                    <GridViewColumn Width="100" Header="Nationalität"
+                                    DisplayMemberBinding="{Binding Path=PlayerNationality}"/>
+                    <GridViewColumn Width="50" Header="Größe"
+                                    DisplayMemberBinding="{Binding Path=PlayerSize, Converter={StaticResource SizeCentimeterConv}}"/>
+                    <GridViewColumn Width="50" Header="Gewicht"
+                                    DisplayMemberBinding="{Binding Path=PlayerWeight, Converter={StaticResource WeightKilogrammConv}}"/>
+                    <GridViewColumn Width="50" Header="Position"
+                                    DisplayMemberBinding="{Binding Path=PlayerPosition}"/>
+                    <GridViewColumn Width="75" Header="2. Position"
+                                    DisplayMemberBinding="{Binding Path=PlayerSecondPosition}"/>
+                    <GridViewColumn Width="50" Header="Wertung"
+                                    DisplayMemberBinding="{Binding Path=PlayerRating}"/>
+                    <GridViewColumn Width="75" Header="Gehalt"
+                                    DisplayMemberBinding="{Binding Path=PlayerSalary, Converter={StaticResource SalaryEuroConv}}"/>
+                    <GridViewColumn Width="75" Header="Vertrag bis"
+                                    DisplayMemberBinding="{Binding Path=PlayerContractUntil}"/>
+                    <GridViewColumn Width="50" Header="Minuten"
+                                    DisplayMemberBinding="{Binding Path=PlayerRotationMinutes}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        </Grid>
+
+        <Grid Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="283*"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Label FontSize="16">Trainer</Label>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="138*"/>
+                    <RowDefinition Height="121*"/>
+                    <RowDefinition Height="307*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="14*"/>
+                    <ColumnDefinition Width="33*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.RowSpan="3">
+                    <Label>Name:</Label>
+                    <Label>Geburtstag:</Label>
+                    <Label>Nationalität:</Label>
+                    <Label>Wertung:</Label>
+                    <Label>Gehalt:</Label>
+                </StackPanel>
+                
+                <StackPanel Name="stckpnCoach" Grid.Column="1" Grid.RowSpan="3">
+                    <Label Content="{Binding}"></Label>
+                    <Label Content="{Binding CoachBirthday}"></Label>
+                    <Label Content="{Binding CoachNationality}"></Label>
+                    <Label Content="{Binding CoachRating}"></Label>
+                    <Label Content="{Binding CoachSalary, Converter={StaticResource SalaryEuroConv}}"></Label>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+
+                    <Button Name="btnBuyPlayer" Click="btnBuyPlayer_Click" Margin="5">Spieler kaufen</Button>
+                    <Button Name="btnReleasePlayer" Click="btnReleasePlayer_Click" Margin="5">Spieler entlassen</Button>
+                    <Button Name="btnReleaseCoach" Margin="5" Click="btnReleaseCoach_Click"
+                            Content="{Binding TeamCoach, Converter={StaticResource TeamCoachbtnReleaseCoachContentConv}}"></Button>
+                    <Button Name="btnTransferNegotiations" Margin="5" Click="btnTransferNegotiations_Click">Laufende Transferverhandlungen</Button>
+                </StackPanel>
+
+                <Grid Grid.Row="2" Grid.ColumnSpan="2">
+
+                    <StackPanel Margin="15,5,5,5">
+                        <Label FontSize="16">Spiele heute</Label>
+                        <ListBox Name="lstbxGamesToday" ItemsSource="{Binding Games}" >
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                
+                                    <Border BorderBrush="Red" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <Border.BorderThickness>
+                                            <MultiBinding StringFormat="{} {0} {1}" Converter="{StaticResource GamesFontWeightConv}">
+                                                <Binding Path="GameOpponentHome"/>
+                                                <Binding Path="GameOpponentGuest"/>
+                                            </MultiBinding>
+                                        </Border.BorderThickness>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                            <Image Source="{Binding GameOpponentHome, Converter={StaticResource GameOpponentImageConv}}"
+                                               Width="100" Margin="0,0,0,5"></Image>
+                                            <Label FontSize="25" HorizontalAlignment="Center" Margin="0,20,0,5">vs.</Label>
+                                            <Image Source="{Binding GameOpponentGuest, Converter={StaticResource GameOpponentImageConv}}"
+                                               Width="100" Margin="5,0,0,5"></Image>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+
+        </Grid>
+        
+        <StackPanel VerticalAlignment="Center" Grid.Column="1">
+            <Button Name="btnUp" Click="btnUp_Click">up</Button>
+            <Button Name="btnDown" Click="btnDown_Click">down</Button>
+            <Button Name="btnIncreaseMinutes" Click="btnIncreaseMinutes_Click">+</Button>
+            <Button Name="btnDecreaseMinutes" Click="btnDecreaseMinutes_Click">-</Button>
+        </StackPanel>
+       
+ 
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="643*"/>
+                <ColumnDefinition Width="204*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
+                <Label VerticalAlignment="Center" FontSize="16">Datum:</Label>
+                <Label Name="lblCurrentDate" Content="{Binding PublicPropertyCurrentDate, Converter={StaticResource DateConv}}"
+                       VerticalAlignment="Center" FontSize="16"></Label>
+            </StackPanel>
+            <Button Grid.Column="1" Name="btnNextDay" Click="btnNextDay_Click" VerticalAlignment="Center" FontSize="16" Margin="15">Nächster Tag</Button>
+        </Grid>
+        
+
+        
+    </Grid>
+</Window>
