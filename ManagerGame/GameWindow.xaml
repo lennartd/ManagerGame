@@ -12,6 +12,7 @@
         <local:GamesToFontWeightConverter x:Key="GamesFontWeightConv"/>
         <local:GameOpponentToImageSourceConverter x:Key="GameOpponentImageConv"/>
         <local:DateConverter x:Key="DateConv"/>
+        <local:EmailToMessageConverter x:Key="EmailMessageConv"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
