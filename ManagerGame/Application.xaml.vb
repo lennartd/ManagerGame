@@ -140,9 +140,11 @@
         AllPublicProperties = publicProperties1
 
         Dim email1 As New Email(#1/1/2000#, "FC Bayern München Basketball", "Transfer", "neue Transfernews!", False)
+        Dim email2 As New Email(#1/2/2000#, "Vorstand", "Saisonziele", "Meisterschaft gewinnen", False)
 
         Dim emails As New EmailsList
         emails.Emails.Add(email1)
+        emails.Emails.Add(email2)
 
         AllEmails = emails
     End Sub

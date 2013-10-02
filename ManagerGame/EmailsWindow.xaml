@@ -1,8 +1,26 @@
 ﻿<Window x:Class="EmailsWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Nachrichten" Height="300" Width="300">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+        Title="Nachrichten" Height="476" Width="832.875">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="43*"/>
+            <ColumnDefinition Width="75*"/>
+        </Grid.ColumnDefinitions>
+       
+        <ListBox Name="lstbxAllEmails" ItemsSource="{Binding Emails}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="5">
+                        <StackPanel>
+                            <Label Content="{Binding Path=EmailFrom}" FontWeight="Bold"></Label>
+                            <Label Content="{Binding Path=EmailSubject}" FontWeight="DemiBold"></Label>
+                            <Label Content="{Binding Path=EmailDate}" FontWeight="Light"></Label>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
