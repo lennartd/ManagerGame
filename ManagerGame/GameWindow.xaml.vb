@@ -28,7 +28,7 @@ Public Class GameWindow
         Next
 
 
-        lblNewEmails.DataContext = AllEmails
+        btnNewEmails.DataContext = AllEmails
 
     End Sub
 
@@ -481,4 +481,11 @@ Public Class GameWindow
                 Return True
         End Select
     End Function
+
+
+    Private Sub btnNewEmails_Click(sender As Object, e As RoutedEventArgs)
+
+        Dim w As New EmailsWindow
+        w.Show()
+    End Sub
 End Class

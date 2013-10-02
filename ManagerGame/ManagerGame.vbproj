@@ -81,6 +81,9 @@
     <Compile Include="Email.vb" />
     <Compile Include="EmailContainer.vb" />
     <Compile Include="EmailsList.vb" />
+    <Compile Include="EmailsWindow.xaml.vb">
+      <DependentUpon>EmailsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EmailToMessageConverter.vb" />
     <Compile Include="Game.vb" />
     <Compile Include="GameContainer.vb" />
@@ -125,6 +128,10 @@
       <DependentUpon>NewGameWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="BuyPlayerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
