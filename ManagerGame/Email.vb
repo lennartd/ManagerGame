@@ -7,8 +7,8 @@ Public Class Email
 
     End Sub
 
-    Public Sub New(ByVal dateOfEmail As Date, ByVal from As String, ByVal subject As String, ByVal content As String)
-        _date = dateOfEmail : _from = from : _subject = subject : _content = content
+    Public Sub New(ByVal dateOfEmail As Date, ByVal from As String, ByVal subject As String, ByVal content As String, ByVal read As Boolean)
+        _date = dateOfEmail : _from = from : _subject = subject : _content = content : _read = read
     End Sub
 
     Private _date As Date
@@ -52,6 +52,17 @@ Public Class Email
         Set(ByVal value As String)
             _content = value
             RaiseProp("EmailContent")
+        End Set
+    End Property
+
+    Private _read As Boolean
+    Public Property EmailRead() As Boolean
+        Get
+            Return _read
+        End Get
+        Set(ByVal value As Boolean)
+            _read = value
+            RaiseProp("EmailRead")
         End Set
     End Property
 

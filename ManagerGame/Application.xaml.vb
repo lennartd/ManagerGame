@@ -139,6 +139,11 @@
         Dim publicProperties1 As New PublicProperties(#1/1/2000#)
         AllPublicProperties = publicProperties1
 
-        AllEmails = New EmailsList()
+        Dim email1 As New Email(#1/1/2000#, "FC Bayern München Basketball", "Transfer", "neue Transfernews!", False)
+
+        Dim emails As New EmailsList
+        emails.Emails.Add(email1)
+
+        AllEmails = emails
     End Sub
 End Class

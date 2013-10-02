@@ -140,7 +140,7 @@ Module PublicVariablesContainer
 
         content = content & vbNewLine & "Mit freundlichen Grüßen"
 
-        AllEmails.Emails.Add(New Email(CurrentDate, from, subject, content))
+        AllEmails.Emails.Add(New Email(CurrentDate, from, subject, content, False))
     End Sub
 
 End Module

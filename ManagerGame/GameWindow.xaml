@@ -179,7 +179,8 @@
             <Button Grid.Column="1" Name="btnNextDay" Click="btnNextDay_Click" VerticalAlignment="Center" FontSize="16" Margin="15">Nächster Tag</Button>
         </Grid>
         
-
-        
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Label Name="lblNewEmails" Content="{Binding Emails, Converter={StaticResource EmailMessageConv}}"></Label>
+        </Grid>
     </Grid>
 </Window>

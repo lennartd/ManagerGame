@@ -4,7 +4,6 @@ Imports System.Windows
 Imports System.Windows.Data
 
 
-' ReSharper disable once CheckNamespace
 Public Class GameWindow
 
     Private Sub GameWindow_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
@@ -28,6 +27,8 @@ Public Class GameWindow
             End If
         Next
 
+
+        lblNewEmails.DataContext = AllEmails
 
     End Sub
 

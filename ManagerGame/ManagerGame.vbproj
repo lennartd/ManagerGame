@@ -81,6 +81,7 @@
     <Compile Include="Email.vb" />
     <Compile Include="EmailContainer.vb" />
     <Compile Include="EmailsList.vb" />
+    <Compile Include="EmailToMessageConverter.vb" />
     <Compile Include="Game.vb" />
     <Compile Include="GameContainer.vb" />
     <Compile Include="GameOpponentToImageSourceConverter.vb" />
