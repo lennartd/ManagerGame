@@ -8,19 +8,53 @@
             <ColumnDefinition Width="43*"/>
             <ColumnDefinition Width="75*"/>
         </Grid.ColumnDefinitions>
-       
-        <ListBox Name="lstbxAllEmails" ItemsSource="{Binding Emails}">
+
+        <ListBox Name="lstbxAllEmails" ItemsSource="{Binding Emails}"
+                 SelectionChanged="lstbxAllEmails_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="5">
                         <StackPanel>
                             <Label Content="{Binding Path=EmailFrom}" FontWeight="Bold"></Label>
                             <Label Content="{Binding Path=EmailSubject}" FontWeight="DemiBold"></Label>
-                            <Label Content="{Binding Path=EmailDate}" FontWeight="Light"></Label>
+                            <Label Content="{Binding Path=EmailDate}" FontStyle="Italic"></Label>
                         </StackPanel>
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <Grid Grid.Column="1" Name="grdCurrentEmail" HorizontalAlignment="Left" Width="524">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="63*"/>
+                <RowDefinition Height="160*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="63*"/>
+                    <ColumnDefinition Width="461*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="17*"/>
+                    <RowDefinition Height="17*"/>
+                </Grid.RowDefinitions>
+                <Viewbox Grid.ColumnSpan="2" Margin="5,0,10,0" HorizontalAlignment="Left" >
+                    <TextBlock Text="{Binding EmailSubject, FallbackValue=Betreff}" 
+                       FontSize="30" VerticalAlignment="Center" Height="50" TextWrapping="Wrap"/>
+                </Viewbox>
+                <Label Grid.Row="1" FontSize="18">From:</Label>
+                <Label Grid.Row="2" FontSize="18">Date:</Label>
+                <Label Grid.Row="1" Grid.Column="1" 
+                       Content="{Binding EmailFrom, FallbackValue=from@test.com}" FontSize="18"></Label>
+                <Label Grid.Row="2" Grid.Column="1" 
+                       Content="{Binding EmailDate, FallbackValue=11.11.1111}" FontSize="18"></Label>
+            </Grid>
+            <TextBlock Grid.Row="1" 
+                       Text="{Binding EmailContent, FallbackValue=TestContent}"
+                       FontSize="16" Margin="5,20,0,0" TextWrapping="Wrap"></TextBlock>
+
+
+        </Grid>
     </Grid>
 </Window>

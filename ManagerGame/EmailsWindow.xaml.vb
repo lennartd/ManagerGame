@@ -4,4 +4,12 @@
 
         lstbxAllEmails.DataContext = AllEmails
     End Sub
+
+    Private Sub lstbxAllEmails_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+
+        Dim selectedIndex As Integer = lstbxAllEmails.SelectedIndex
+
+        grdCurrentEmail.DataContext = AllEmails.Emails(selectedIndex)
+    End Sub
+
 End Class

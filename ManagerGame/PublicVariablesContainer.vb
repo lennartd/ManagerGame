@@ -105,7 +105,7 @@ Module PublicVariablesContainer
         End If
     End Function
 
-    Public Sub SendEmail(ByVal from As String, ByVal type As Integer, ByVal offer As Offer)
+    Public Sub SendEmail(ByVal emailFrom As String, ByVal type As Integer, ByVal offer As Offer)
         '__________________________
         '
         '0 : OfferMade
@@ -138,9 +138,9 @@ Module PublicVariablesContainer
                 content = content & "die Transferverhandlungen über " & offer.OfferPlayerName & "sind gescheitert."
         End Select
 
-        content = content & vbNewLine & "Mit freundlichen Grüßen"
+        content = content & vbNewLine & vbNewLine & "Mit freundlichen Grüßen" & vbNewLine & vbNewLine & emailFrom
 
-        AllEmails.Emails.Add(New Email(CurrentDate, from, subject, content, False))
+        AllEmails.Emails.Add(New Email(CurrentDate, emailFrom, subject, content, False))
     End Sub
 
 End Module
