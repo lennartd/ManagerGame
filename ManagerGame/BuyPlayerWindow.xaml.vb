@@ -4,8 +4,11 @@ Public Class BuyPlayerWindow
     Dim _playerName As String
     Dim _playerIndex As Integer
 
+    Dim _salaryEuroConv As SalaryToEuroConverter
+
     Private Sub BuyPlayerWindow_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
 
+        _salaryEuroConv = New SalaryToEuroConverter()
 
         lstvwPlayers.DataContext = AllPlayers
         cmbbxChooseSelection.SelectedIndex = 0
@@ -54,6 +57,8 @@ Public Class BuyPlayerWindow
             End If
 
         Next
+
+        lblTeamMoney.DataContext = AllTeams.Teams(CurrentTeamIndex)
 
 
         For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
@@ -104,6 +109,17 @@ Public Class BuyPlayerWindow
 
     Private Sub btnMakeOffer_Click(sender As Object, e As RoutedEventArgs)
 
+        Try
+            If Not txtbxRedemptionValue.Text.Split(" ")(1) = "€" Or Not txtbxSalaryValue.Text.Split(" ")(1) Then
+                MsgBox("Ablösesumme und Gehalt im richtigen Format angeben! (Wert €)")
+                Exit Sub
+            End If
+        Catch
+            MsgBox("Ablösesumme und Gehalt im richtigen Format angeben! (Wert €)")
+            Exit Sub
+        End Try
+
+
         If txtbxContractUntil.Text = Nothing Then
             MsgBox("Vertragsdauer angeben!")
             Exit Sub
@@ -113,15 +129,21 @@ Public Class BuyPlayerWindow
         Try
             contractUntil = CInt(txtbxContractUntil.Text)
         Catch
-            MsgBox("Vertragsdauer als Jahr angeben")
+            MsgBox("Vertragsdauer als Jahr angeben!")
             Exit Sub
         End Try
 
         If Not contractUntil > AllPublicProperties.PublicPropertyCurrentDate.Year Or Not contractUntil < (AllPublicProperties.PublicPropertyCurrentDate.Year + 6) Then
-            MsgBox("Vertragsdauer mind. 1 Jahr und max. 5 Jahre")
+            MsgBox("Vertragsdauer mind. 1 Jahr und max. 5 Jahre!")
             Exit Sub
         End If
 
+
+        If AllTeams.Teams(CurrentTeamIndex).TeamMoney < _salaryEuroConv.ConvertBack(txtbxRedemptionValue.Text, Nothing, Nothing, Nothing) Then
+            MsgBox("Die " & AllTeams.Teams(CurrentTeamIndex).TeamName & " haben nicht genügend verfügbares Vermögen um eine Ablösesumme von " _
+                   & txtbxRedemptionValue.Text & " zu bezahlen.")
+            Exit Sub
+        End If
 
         Dim playerTeamName As String = Nothing
 
