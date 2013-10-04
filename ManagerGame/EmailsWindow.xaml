@@ -43,8 +43,8 @@
                     <TextBlock Text="{Binding EmailSubject, FallbackValue=Betreff}" 
                        FontSize="30" VerticalAlignment="Center" Height="50" TextWrapping="Wrap"/>
                 </Viewbox>
-                <Label Grid.Row="1" FontSize="18">From:</Label>
-                <Label Grid.Row="2" FontSize="18">Date:</Label>
+                <Label Grid.Row="1" FontSize="18">Von:</Label>
+                <Label Grid.Row="2" FontSize="18">Datum:</Label>
                 <Label Grid.Row="1" Grid.Column="1" 
                        Content="{Binding EmailFrom, FallbackValue=from@test.com}" FontSize="18"></Label>
                 <Label Grid.Row="2" Grid.Column="1" 
