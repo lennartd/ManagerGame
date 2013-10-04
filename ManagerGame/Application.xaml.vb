@@ -10,7 +10,6 @@
         CurrentTeamIndex = Nothing
         AllPlayersWithOffers = New PlayersList
         AllOffers = New OffersList
-        CurrentDate = #1/1/2000#
 
         Dim player1 As New Player("Tanner", "Smith", "30.03.1990", "USA", 196, 95, "SG", "", 80, "MHP Riesen Ludwigsburg", 3500, 2014, 1, 20, New OffersList, 0)
         Dim player2 As New Player("Patrick", "Flomo", "19.07.1980", "Deutschland", 203, 101, "PF", "C", 73, "MHP Riesen Ludwigsburg", 2500, 2015, 2, 1, New OffersList, 0)

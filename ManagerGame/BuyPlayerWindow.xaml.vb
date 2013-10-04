@@ -111,7 +111,7 @@ Public Class BuyPlayerWindow
             Exit Sub
         End Try
 
-        If Not contractUntil > CurrentDate.Year Or Not contractUntil < (CurrentDate.Year + 6) Then
+        If Not contractUntil > AllPublicProperties.PublicPropertyCurrentDate.Year Or Not contractUntil < (AllPublicProperties.PublicPropertyCurrentDate.Year + 6) Then
             MsgBox("Vertragsdauer mind. 1 Jahr und max. 5 Jahre")
             Exit Sub
         End If
@@ -130,7 +130,7 @@ Public Class BuyPlayerWindow
             Next
         Next
 
-        Dim newOffer As New Offer(_playerName, playerTeamName, CurrentDate, CurrentDate, txtbxRedemptionValue.Text, _
+        Dim newOffer As New Offer(_playerName, playerTeamName, AllPublicProperties.PublicPropertyCurrentDate, AllPublicProperties.PublicPropertyCurrentDate, txtbxRedemptionValue.Text, _
                                txtbxSalaryValue.Text, AllTeams.Teams(CurrentTeamIndex).TeamName, _
                                contractUntil, 0)
 

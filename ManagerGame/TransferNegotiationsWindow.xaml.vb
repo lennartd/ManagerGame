@@ -197,8 +197,8 @@ Public Class TransferNegotiationsWindow
 
         End Select
 
-        _allCurrentTeamOffers.Offers(_selectedPlayerIndex).OfferLastDealtDate = CurrentDate
-        AllOffers.Offers(allOffersIndex).OfferLastDealtDate = CurrentDate
+        _allCurrentTeamOffers.Offers(_selectedPlayerIndex).OfferLastDealtDate = AllPublicProperties.PublicPropertyCurrentDate
+        AllOffers.Offers(allOffersIndex).OfferLastDealtDate = AllPublicProperties.PublicPropertyCurrentDate
 
         stckpnlWorkOntransfers.Visibility = Visibility.Hidden
 
