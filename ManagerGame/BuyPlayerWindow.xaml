@@ -77,38 +77,41 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150*"/>
+                <ColumnDefinition Width="250*"/>
+                <ColumnDefinition Width="500*"/>
+            </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal">
-                <Label Margin="5">Name:</Label>
-                <Label Name="lblName" Margin=" 0,5,5,5" Content="{Binding SelectedValue}"></Label>
-                <Label Margin="200,5,5,5">Status:</Label>
+                <Label Margin="5,5,5,0" FontWeight="Bold">Name:</Label>
+                <Label Name="lblName" Margin="0,5,5,5" Content="{Binding SelectedValue}"></Label>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                <Label Margin="0,5,0,5" FontWeight="Bold">Status:</Label>
                 <Label Name="lblStatus" Margin="0,5,5,5" Content="{Binding}"></Label>
             </StackPanel>
 
-            <StackPanel Grid.Row="1" Name="stckpnlRedemption" Orientation="Horizontal">
-                <Label Margin="5">Ablösesumme:</Label>
-                <Slider Name="sldrRedemption" Maximum="100000" Minimum="500" SmallChange="10" TickFrequency="10" LargeChange="100" Width="300" VerticalAlignment="Center"/>
-                <TextBox Name="txtbxRedemptionValue" Text="{Binding Value, Converter={StaticResource DoubleIntegerEuroConv}}"></TextBox>
-            </StackPanel>
+                <Label Name="lblRedemption" Grid.Row="1" Margin="5">Ablösesumme:</Label>
+                <Slider Grid.Row="1" Grid.Column="1" Name="sldrRedemption" Maximum="100000" Minimum="500" SmallChange="10" TickFrequency="10" LargeChange="100" Width="300" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="2" Name="txtbxRedemptionValue" Text="{Binding Value, Converter={StaticResource DoubleIntegerEuroConv}}" Width="100
+                         " HorizontalAlignment="Left" Margin="5"></TextBox>
 
-            <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <Label Margin="5">Gehalt::</Label>
-                <Slider Name="sldrSalary" Maximum="20000" Minimum="500" SmallChange="10" TickFrequency="10" LargeChange="100" Width="300" VerticalAlignment="Center"></Slider>
-                <TextBox Name="txtbxSalaryValue" Text="{Binding Value, Converter={StaticResource DoubleIntegerEuroConv}}"></TextBox>
-            </StackPanel>
+                <Label Grid.Row="2" Margin="5">Gehalt::</Label>
+                <Slider Grid.Row="2" Grid.Column="1" Name="sldrSalary" Maximum="20000" Minimum="500" SmallChange="10" TickFrequency="10" LargeChange="100" Width="300" VerticalAlignment="Center"></Slider>
+                <TextBox Grid.Row="2" Grid.Column ="2"  Name="txtbxSalaryValue" Text="{Binding Value, Converter={StaticResource DoubleIntegerEuroConv}}" Width="100" HorizontalAlignment="Left" Margin="5"></TextBox>
 
-            <StackPanel Grid.Row="3" Orientation="Horizontal">
-                <Label Margin="5">Vertragsdauer bis:</Label>
-                <TextBox Name="txtbxContractUntil" Margin="5"></TextBox>
-            </StackPanel>
+                <Label Grid.Row="3" Margin="5">Vertragsdauer bis:</Label>
+                <TextBox Grid.Row="3" Grid.Column="2" Name="txtbxContractUntil" Width="100" Margin="5" HorizontalAlignment="Left"></TextBox>
             
-            <Grid Grid.Row="4">
+            <Grid Grid.Row="4" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="btnBack" Click="btnBack_Click" Content="Zurück" Margin="10" HorizontalAlignment="Left"></Button>
-                <Button Grid.Column="1" Name="btnMakeOffer" Click="btnMakeOffer_Click" Content="Angebot unterbreiten" Margin="10" HorizontalAlignment="Right"></Button>
+                <Button Name="btnBack" Click="btnBack_Click" Content="Zurück" Margin="5" Width="100" HorizontalAlignment="Left" ></Button>
+                <Button Grid.Column="1" Name="btnMakeOffer" Click="btnMakeOffer_Click" Content="Angebot unterbreiten" Width="150" Margin="5" HorizontalAlignment="Right"></Button>
             </Grid>
 
         </Grid>

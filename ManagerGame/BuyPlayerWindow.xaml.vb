@@ -46,10 +46,10 @@ Public Class BuyPlayerWindow
                 If AllPlayers.Players(i).PlayerCurrentTeam = Nothing Then
 
                     lblStatus.DataContext = "vertragslos"
-                    stckpnlRedemption.IsEnabled = False
+                    SwitchRedemption(False)
                 Else
                     lblStatus.DataContext = "Vertrag bis " & AllPlayers.Players(i).PlayerContractUntil
-                    stckpnlRedemption.IsEnabled = True
+                    SwitchRedemption(True)
                 End If
             End If
 
@@ -83,6 +83,12 @@ Public Class BuyPlayerWindow
 
         grdRow3.Visibility = Visibility.Visible
 
+    End Sub
+
+    Private Sub SwitchRedemption(ByVal boolValue As Boolean)
+        lblRedemption.IsEnabled = boolValue
+        sldrRedemption.IsEnabled = boolValue
+        txtbxRedemptionValue.IsEnabled = boolValue
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As RoutedEventArgs)
