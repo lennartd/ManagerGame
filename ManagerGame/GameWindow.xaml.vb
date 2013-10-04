@@ -269,7 +269,6 @@ Public Class GameWindow
 
                 AllTeams.Teams(CurrentTeamIndex).TeamAdditionalSalary += AllTeams.Teams(CurrentTeamIndex).TeamCoach.CoachSalary
 
-                'AllTeams.Teams(CurrentTeamIndex).TeamCoach = New Coach("test", "test", "test", "test", 99, "MHP Riesen Ludwigsburg", 2000, New OffersList)
                 AllTeams.Teams(CurrentTeamIndex).TeamCoach = New Coach
 
 
@@ -399,7 +398,6 @@ Public Class GameWindow
                             Else
                                 AllOffers.Offers(i).OfferStatus = 1
                             End If
-                            SendEmail(AllOffers.Offers(i).OfferBiddingTeam, AllOffers.Offers(i).OfferStatus, AllOffers.Offers(i))
                         Else
                             If CheckSalary(currentPlayer.PlayerRating, AllOffers.Offers(i).OfferSalary) = True Then
                                 AllOffers.Offers(i).OfferStatus = 4
@@ -461,16 +459,16 @@ Public Class GameWindow
 
     Private Sub UpdateOfferLastDealtDate(ByVal offerIndex As Integer)
 
-        AllOffers.Offers(offerIndex).OfferLastDealtDate = CurrentDate
+        AllOffers.Offers(offerIndex).OfferLastDealtDate = AllPublicProperties.PublicPropertyCurrentDate
 
     End Sub
 
     Private Function CheckIfOfferShouldBeDealtWith(ByVal lastDealtDate As Date) As Boolean
-        Dim difference As Long = DateDiff("d", lastDealtDate, CurrentDate)
+        Dim difference As Long = DateDiff("d", lastDealtDate, AllPublicProperties.PublicPropertyCurrentDate)
         Select Case difference
-            Case 0 - 1
+            Case 0 To 1
                 Return False
-            Case 2 - 6
+            Case 2 To 6
                 Const max As Single = 1
                 If CInt(Math.Ceiling(Rnd() * max)) = 0 Then 'from 0 to 1
                     Return True
