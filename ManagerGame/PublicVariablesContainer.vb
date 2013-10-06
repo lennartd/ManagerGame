@@ -82,7 +82,7 @@ Module PublicVariablesContainer
         'return true if appropriate according to rating, else return false
 
         'TODO: adapt factor!
-        Const factor As Integer = 1500 'rating to appropriate redemption
+        Const factor As Integer = 900 'rating to appropriate redemption
 
         If (rating * factor) > redemption Then
             Return False
@@ -95,7 +95,7 @@ Module PublicVariablesContainer
         'return true if appropriate according to rating, else return false
 
         'TODO: adapt factor!
-        Const factor As Integer = 1000 'rating to appropriate salary
+        Const factor As Integer = 60 'rating to appropriate salary
 
         If (rating * factor) > salary Then
             Return False

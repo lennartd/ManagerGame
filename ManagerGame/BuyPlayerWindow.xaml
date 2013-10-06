@@ -103,7 +103,7 @@
                 <TextBox Grid.Row="1" Grid.Column="2" Name="txtbxRedemptionValue" Text="{Binding Value, Converter={StaticResource DoubleIntegerEuroConv}}" Width="100
                          " HorizontalAlignment="Left" Margin="5"></TextBox>
 
-                <Label Grid.Row="2" Margin="5">Gehalt:</Label>
+                <Label Grid.Row="2" Margin="5">Gehalt (monatlich):</Label>
                 <Slider Grid.Row="2" Grid.Column="1" Name="sldrSalary" Maximum="20000" Minimum="500" SmallChange="10" TickFrequency="10" LargeChange="100" Width="300" VerticalAlignment="Center"></Slider>
                 <TextBox Grid.Row="2" Grid.Column ="2"  Name="txtbxSalaryValue" Text="{Binding Value, Converter={StaticResource DoubleIntegerEuroConv}}" Width="100" HorizontalAlignment="Left" Margin="5"></TextBox>
 
