@@ -110,7 +110,7 @@ Public Class BuyPlayerWindow
     Private Sub btnMakeOffer_Click(sender As Object, e As RoutedEventArgs)
 
         Try
-            If Not txtbxRedemptionValue.Text.Split(" ")(1) = "€" Or Not txtbxSalaryValue.Text.Split(" ")(1) Then
+            If Not txtbxRedemptionValue.Text.Split(" ")(1) = "€" Then
                 MsgBox("Ablösesumme und Gehalt im richtigen Format angeben! (Wert €)")
                 Exit Sub
             End If
