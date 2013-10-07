@@ -2,7 +2,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+                 xmlns:local="clr-namespace:ManagerGame"
         Title="Nachrichten" Height="476" Width="832.875">
+    <Window.Resources>
+        <local:DateConverter x:Key="DateConv"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="43*"/>
@@ -31,7 +36,7 @@
             </Grid.RowDefinitions>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="63*"/>
+                    <ColumnDefinition Width="70*"/>
                     <ColumnDefinition Width="461*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -48,7 +53,7 @@
                 <Label Grid.Row="1" Grid.Column="1" 
                        Content="{Binding EmailFrom, FallbackValue=from@test.com}" FontSize="18"></Label>
                 <Label Grid.Row="2" Grid.Column="1" 
-                       Content="{Binding EmailDate, FallbackValue=11.11.1111}" FontSize="18"></Label>
+                       Content="{Binding EmailDate, FallbackValue=11.11.1111, Converter={StaticResource DateConv}}" FontSize="18"></Label>
             </Grid>
             <TextBlock Grid.Row="1" 
                        Text="{Binding EmailContent, FallbackValue=TestContent}"

@@ -302,8 +302,6 @@ Public Class GameWindow
 
     Private Sub btnNextDay_Click(sender As Object, e As RoutedEventArgs)
 
-        'TODO: Tag simulieren
-
         'msgbox if currentteam has games today
         For i = 0 To AllDaysOfPlay.DaysOfPlay.Count - 1
 
@@ -451,9 +449,6 @@ Public Class GameWindow
             Dim w As New ResultsWindow
             w.Show()
         End If
-
-
-        'TODO: implement Emails in XAML Code
 
     End Sub
 

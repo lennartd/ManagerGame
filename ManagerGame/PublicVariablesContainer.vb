@@ -140,6 +140,18 @@ Module PublicVariablesContainer
         content = content & vbNewLine & vbNewLine & "Mit freundlichen Grüßen" & vbNewLine & vbNewLine & emailFrom
 
         AllEmails.Emails.Add(New Email(AllPublicProperties.PublicPropertyCurrentDate, emailFrom, subject, content, False))
+
+
+        Dim w = TryCast(Application.Current.Windows.Cast(Of Window)().FirstOrDefault(Function(window) TypeOf window Is GameWindow), GameWindow)
+
+        w.stckpnCoach.DataContext = Nothing
+        w.stckpnCoach.DataContext = AllTeams.Teams(CurrentTeamIndex).TeamCoach
+
+        w.Close()
+
+        Dim w2 As New GameWindow
+        w2.Show()
+
     End Sub
 
 End Module

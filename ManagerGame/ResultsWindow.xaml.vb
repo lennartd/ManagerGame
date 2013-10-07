@@ -15,7 +15,7 @@ Public Class ResultsWindow
 
         cmbbxChooseTeam.SelectedIndex = 0
 
-        grdGame.Visibility = Visibility.Hidden
+        lstbxGamesToday.SelectedIndex = 0
 
     End Sub
 
