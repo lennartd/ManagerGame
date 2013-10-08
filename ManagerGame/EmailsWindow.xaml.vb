@@ -12,6 +12,8 @@
         Dim selectedIndex As Integer = lstbxAllEmails.SelectedIndex
 
         grdCurrentEmail.DataContext = AllEmails.Emails(selectedIndex)
+
+        AllEmails.Emails(selectedIndex).EmailRead = True 'schlechte Lösung??
     End Sub
 
 End Class

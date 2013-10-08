@@ -6,6 +6,8 @@
         Title="Nachrichten" Height="476" Width="832.875">
     <Window.Resources>
         <local:DateConverter x:Key="DateConv"/>
+        <local:EmailReadToFontWeightConverter x:Key="EmailReadFontWeightConv"/>
+        
     </Window.Resources>
     
     <Grid>
@@ -20,9 +22,12 @@
                 <DataTemplate>
                     <Border BorderThickness="5">
                         <StackPanel>
-                            <Label Content="{Binding Path=EmailFrom}" FontWeight="Bold"></Label>
-                            <Label Content="{Binding Path=EmailSubject}" FontWeight="DemiBold"></Label>
-                            <Label Content="{Binding Path=EmailDate}" FontStyle="Italic"></Label>
+                            <Label Content="{Binding Path=EmailFrom}" FontSize="18" 
+                                   FontWeight="{Binding EmailRead, Converter={StaticResource EmailReadFontWeightConv}}"></Label>
+                            <Label Content="{Binding Path=EmailSubject}" FontSize="14"
+                                   FontWeight="{Binding EmailRead, Converter={StaticResource EmailReadFontWeightConv}}"></Label>
+                            <Label Content="{Binding Path=EmailDate}" FontStyle="Italic"
+                                   FontWeight="{Binding EmailRead, Converter={StaticResource EmailReadFontWeightConv}}"></Label>
                         </StackPanel>
                     </Border>
                 </DataTemplate>

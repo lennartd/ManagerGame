@@ -80,6 +80,7 @@
     <Compile Include="DoubleToIntegerEuroConverter.vb" />
     <Compile Include="Email.vb" />
     <Compile Include="EmailContainer.vb" />
+    <Compile Include="EmailReadToFontWeightConverter.vb" />
     <Compile Include="EmailsList.vb" />
     <Compile Include="EmailsWindow.xaml.vb">
       <DependentUpon>EmailsWindow.xaml</DependentUpon>
