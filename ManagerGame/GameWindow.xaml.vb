@@ -10,7 +10,7 @@ Public Class GameWindow
 
         lstvwRotation.DataContext = AllTeams.Teams(CurrentTeamIndex).TeamPlayers
 
-        lblRemainingMinutes.DataContext = AllRemainingMinutes.RemainingMinutes(0)
+        lblRemainingMinutes.DataContext = AllRemainingMinutes.RemainingMinutes(0) 'korrekt?
 
         stckpnCoach.DataContext = AllTeams.Teams(CurrentTeamIndex).TeamCoach
 
@@ -320,6 +320,9 @@ Public Class GameWindow
                             Exit Sub
                         End If
 
+                        If CheckSimuulateGamesRequirements() = False Then
+                            Exit Sub
+                        End If
                     End If
                 Next
             End If
@@ -452,6 +455,66 @@ Public Class GameWindow
 
     End Sub
 
+#Region "CheckSimulateGameRequirements"
+    Private Function CheckSimuulateGamesRequirements() As Boolean
+
+        If AllTeams.Teams(CurrentTeamIndex).TeamCoach.CoachLastName = Nothing Then
+            MsgBox("Deine Mannschaft kann ohne Trainer nicht antreten!")
+            Return False
+        ElseIf Not AllRemainingMinutes.RemainingMinutes(0).RotationRemainingMinutes = 0 Then
+            MsgBox("Du musst alle verbleibenden Minuten deiner Rotation vergeben!")
+            Return False
+        ElseIf GetNumberOfPlayersWithMinutes() >= 12 Then
+            MsgBox("Es dürfen maximal 12 Spieler deiner Mannschaft in der Rotation stehen!")
+            Return False
+        ElseIf GetNumberOfGermanPlayers() <= 6 Then
+            MsgBox("Es müssen mindesten 6 Spieler in deiner Rotation Deutsche sein!")
+            Return False
+        ElseIf CheckIfStaringFiveHasMinutes() = False Then
+            MsgBox("Jeder Spieler deiner Starting 5 muss in der Rotation stehen!")
+            Return False
+        End If
+        Return True
+    End Function
+
+    Private Function CheckIfStaringFiveHasMinutes() As Boolean
+        For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+
+            If AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber <= 5 Then
+
+                If AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes = 0 Then
+                    Return False
+                End If
+            End If
+        Next
+        Return True
+    End Function
+
+    Private Function GetNumberOfGermanPlayers() As Integer
+        Dim count As Integer = 0
+        For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+
+            If AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes > 0 Then
+                If AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerNationality = "Deutschland" Then
+                    count += 1
+                End If
+            End If
+        Next
+        Return count
+    End Function
+
+    Private Function GetNumberOfPlayersWithMinutes() As Integer
+        Dim count As Integer = 0
+        For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+
+            If AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes > 0 Then
+                count += 1
+            End If
+        Next
+        Return count
+    End Function
+#End Region
+    
     Private Sub UpdateOfferLastDealtDate(ByVal offerIndex As Integer)
 
         AllOffers.Offers(offerIndex).OfferLastDealtDate = AllPublicProperties.PublicPropertyCurrentDate
