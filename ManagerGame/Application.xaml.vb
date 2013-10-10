@@ -1,4 +1,6 @@
-﻿Class Application
+﻿Imports System.Data.SqlClient
+
+Class Application
 
     ' Ereignisse auf Anwendungsebene wie Startup, Exit und DispatcherUnhandledException
     ' können in dieser Datei verarbeitet werden.
@@ -10,6 +12,10 @@
         CurrentTeamIndex = Nothing
         AllPlayersWithOffers = New PlayersList
         AllOffers = New OffersList
+
+
+        GetDataFromDatabase()
+
 
         Dim player1 As New Player("Tanner", "Smith", "30.03.1990", "USA", 196, 95, "SG", "", 80, "MHP Riesen Ludwigsburg", 3500, 2014, 1, 20, New OffersList, 0)
         Dim player2 As New Player("Patrick", "Flomo", "19.07.1980", "Deutschland", 203, 101, "PF", "C", 73, "MHP Riesen Ludwigsburg", 2500, 2015, 2, 1, New OffersList, 0)
@@ -40,18 +46,18 @@
         Dim playersMünchen As New PlayersList()
         playersMünchen.Players.Add(player11)
 
-        AllPlayers = New PlayersList
-        AllPlayers.Players.Add(player1)
-        AllPlayers.Players.Add(player2)
-        AllPlayers.Players.Add(player3)
-        AllPlayers.Players.Add(player4)
-        AllPlayers.Players.Add(player5)
-        AllPlayers.Players.Add(player6)
-        AllPlayers.Players.Add(player7)
-        AllPlayers.Players.Add(player8)
-        AllPlayers.Players.Add(player9)
-        AllPlayers.Players.Add(player10)
-        AllPlayers.Players.Add(player11)
+        'AllPlayers = New PlayersList
+        'AllPlayers.Players.Add(player1)
+        'AllPlayers.Players.Add(player2)
+        'AllPlayers.Players.Add(player3)
+        'AllPlayers.Players.Add(player4)
+        'AllPlayers.Players.Add(player5)
+        'AllPlayers.Players.Add(player6)
+        'AllPlayers.Players.Add(player7)
+        'AllPlayers.Players.Add(player8)
+        'AllPlayers.Players.Add(player9)
+        'AllPlayers.Players.Add(player10)
+        'AllPlayers.Players.Add(player11)
 
 
         Dim coach1 As New Coach("John", "Patrick", "29.02.1968", "USA", 85, "MHP Riesen Ludwigsburg", 5500, New OffersList)
@@ -99,7 +105,7 @@
 
         Next
 
-        PlayerContainer.AvailablePlayers = AvailablePlayers
+        PlayerContainer.AvailablePlayers = availablePlayers
 
         Dim availableCoaches As New CoachesList
 
@@ -147,4 +153,64 @@
 
         AllEmails = emails
     End Sub
+
+    Private Sub GetDataFromDatabase()
+
+        Dim players As New PlayersList
+
+
+        Dim con As New SqlConnection("Data Source=E8400-PC\SQLEXPRESS;Initial Catalog=ManagerGame;Integrated Security=True")
+
+        con.Open()
+
+        Dim cmd As New SqlCommand
+        Dim data As SqlDataReader
+
+        cmd.Connection = con
+        cmd.CommandText = "SELECT * FROM Players"
+
+        data = cmd.ExecuteReader()
+
+        While data.Read()
+
+            Dim firstname As String = NotNull(data(1), True)
+            Dim lastname As String = NotNull(data(2), True)
+            Dim birthday As String = NotNull(data(3), True)
+            Dim nationality As String = NotNull(data(4), True)
+            Dim size As Integer = NotNull(data(5), False)
+            Dim weight As Integer = NotNull(data(6), False)
+            Dim position As Integer = NotNull(data(7), False)
+            Dim secondposition As Integer = NotNull(data(8), False)
+            Dim rating As Integer = NotNull(data(9), False)
+            Dim currentteam As String = NotNull(data(10), True)
+            Dim salary As Integer = NotNull(data(11), False)
+            Dim contractuntil As Integer = NotNull(data(12), False)
+            Dim rotationnumber As Integer = NotNull(data(13), False)
+            Dim rotationminutes As Integer = NotNull(data(14), False)
+            Dim pointslastgame As String = NotNull(data(15), True)
+
+
+            Dim player As New Player(firstname, lastname, birthday, nationality, size, weight, position, secondposition, rating, currentteam, salary, _
+                                     contractuntil, rotationnumber, rotationminutes, New OffersList(), pointslastgame)
+            players.Players.Add(player)
+        End While
+
+        con.Close()
+
+
+        AllPlayers = players
+    End Sub
+
+    Private Shared Function NotNull(ByVal value As Object, isString As Boolean) As Object
+        If value Is Nothing OrElse IsDBNull(value) Then
+            Return Nothing
+        Else
+            If isString = True Then
+                Return value.ToString.Trim()
+            Else
+                Return value
+            End If
+        End If
+    End Function
+
 End Class
