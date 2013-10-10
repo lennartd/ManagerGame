@@ -1,7 +1,7 @@
 USE [master]
 GO
 
-/****** Object:  Database [ManagerGame]    Script Date: 10.10.2013 19:58:13 ******/
+/****** Object:  Database [ManagerGame]    Script Date: 10.10.2013 20:48:57 ******/
 CREATE DATABASE [ManagerGame] ON  PRIMARY 
 ( NAME = N'ManagerGame', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\ManagerGame.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
  LOG ON 
