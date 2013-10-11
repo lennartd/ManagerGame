@@ -146,5 +146,13 @@
         emails.Emails.Add(email2)
 
         AllEmails = emails
+
+
+
+        '________________
+        'TODO: entfernen!!
+        Dim xmlhandler As New XmlHandler
+        xmlhandler.Save("C:\Users\Anwender\Desktop\test.xml")
+        '___________________
     End Sub
 End Class

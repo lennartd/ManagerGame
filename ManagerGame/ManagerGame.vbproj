@@ -128,6 +128,7 @@
     <Compile Include="NewGameWindow.xaml.vb">
       <DependentUpon>NewGameWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XMLHandler.vb" />
     <Page Include="BuyPlayerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
