@@ -138,11 +138,11 @@ Public Class XmlHandler
 
                 .WriteStartElement("Team")
 
-                .WriteAttributeString("", AllTeams.Teams(i).TeamName)
-                .WriteAttributeString("", AllTeams.Teams(i).TeamMoney)
-                .WriteAttributeString("", AllTeams.Teams(i).TeamWins)
-                .WriteAttributeString("", AllTeams.Teams(i).TeamLosses)
-                .WriteAttributeString("", AllTeams.Teams(i).TeamAdditionalSalary)
+                .WriteAttributeString("Name", AllTeams.Teams(i).TeamName)
+                .WriteAttributeString("Money", AllTeams.Teams(i).TeamMoney)
+                .WriteAttributeString("Wins", AllTeams.Teams(i).TeamWins)
+                .WriteAttributeString("Losses", AllTeams.Teams(i).TeamLosses)
+                .WriteAttributeString("AdditionalSalary", AllTeams.Teams(i).TeamAdditionalSalary)
                 'Players
                 'Coach
 
