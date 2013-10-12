@@ -680,6 +680,14 @@ Public Class XmlHandler
             Next
 
             .WriteEndElement() 'Teams
+            '------------------------------------------------------------------------------------------------------------------------------
+            .WriteStartElement("PublicProperties")
+
+            .WriteAttributeString("CurrentDate", AllPublicProperties.PublicPropertyCurrentDate)
+
+            .WriteEndElement() 'PublicProperties
+            '------------------------------------------------------------------------------------------------------------------------------
+
 
             .WriteEndElement() 'Data
 
