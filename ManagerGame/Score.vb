@@ -7,12 +7,11 @@ Public Class Score
     End Sub
 
     'TODO: eventuell falsch??
-    'Public Sub New(ByVal _PlayersHome As PlayersList, ByVal _PlayersGuest As PlayersList)
-    '    Me.PlayersHome = _PlayersHome : Me.PlayersGuest = _PlayersGuest
-    'End Sub
+    Public Sub New(ByVal scorehome As PlayersScore, ByVal guest As PlayersScore)
+        _home = scorehome : _guest = guest
+    End Sub
 
     Private _home As PlayersScore
-
     Public Property ScoreHome() As PlayersScore
         Get
             Return _home
@@ -24,7 +23,6 @@ Public Class Score
     End Property
 
     Private _guest As PlayersScore
-
     Public Property ScoreGuest() As PlayersScore
         Get
             Return _guest
