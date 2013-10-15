@@ -10,10 +10,40 @@ Public Class ClassesContainer
 
     Public Sub New(ByVal coaches As CoachesList, ByVal daysofplay As DaysOfPlayList, ByVal emails As EmailsList, ByVal games As GamesList, _
                    ByVal offers As OffersList, ByVal players As PlayersList, ByVal teams As TeamsList, ByVal publicproperties As PublicProperties, _
-                   ByVal remainingminutes As RemainingMinutesList, ByVal availableplayers As PlayersList, ByVal availablecoaches As CoachesList)
+                   ByVal remainingminutes As RemainingMinutesList, ByVal availableplayers As PlayersList, ByVal availablecoaches As CoachesList, _
+                   ByVal playerswithoffers As PlayersList)
         _coaches = coaches : _daysofPlay = daysofplay : _emails = emails : _games = games : _offers = offers : _players = players : _teams = teams
-        _publicproperties = publicproperties : _remainingminutes = remainingminutes : _availableplayers = availableplayers : _availablecoaches = availablecoaches
+        _publicproperties = publicproperties : _remainingminutes = remainingminutes : _availableplayers = availableplayers
+        _availablecoaches = availablecoaches : _playerswithoffers = playerswithoffers
     End Sub
+
+    Public Sub InitializeOriginalObjects()
+        AllCoaches = ClassesContainerCoaches
+        AllDaysOfPlay = ClassesContainerDaysOfPlay
+        AllEmails = ClassesContainerEmails
+        AllGames = ClassesContainerGames
+        AllOffers = ClassesContainerOffers
+        AllPlayers = ClassesContainerPlayers
+        AllTeams = ClassesContainerTeams
+        AllPublicProperties = ClassesContainerPublicProperties
+        AllRemainingMinutes = ClassesContainerRemainingMinutes
+        AvailablePlayers = ClassesContainerAvailablePlayers
+        AvailableCoaches = ClassesContainerAvailableCoaches
+        AllPlayersWithOffers = ClassesContainerPlayersWithOffers
+    End Sub
+
+
+
+    Private _remainingminutes As RemainingMinutesList
+    Public Property ClassesContainerRemainingMinutes() As RemainingMinutesList
+        Get
+            Return _remainingminutes
+        End Get
+        Set(ByVal value As RemainingMinutesList)
+            _remainingminutes = value
+            RaiseProp("ClassesContainerRemainingMinutes")
+        End Set
+    End Property
 
     Private _coaches As CoachesList
     Public Property ClassesContainerCoaches() As CoachesList
@@ -104,16 +134,7 @@ Public Class ClassesContainer
     End Property
 
 
-    Private _remainingminutes As RemainingMinutesList
-    Public Property ClassesContainerRemainingMinutes() As RemainingMinutesList
-        Get
-            Return _remainingminutes
-        End Get
-        Set(ByVal value As RemainingMinutesList)
-            _remainingminutes = value
-            RaiseProp("ClassesContainerRemainingMinutes")
-        End Set
-    End Property
+
 
     Private _availableplayers As PlayersList
     Public Property ClassesContainerAvailablePlayers() As PlayersList
@@ -136,6 +157,19 @@ Public Class ClassesContainer
             RaiseProp("ClassesContainerAvailableCoaches")
         End Set
     End Property
+
+    Private _playerswithoffers As PlayersList
+
+    Public Property ClassesContainerPlayersWithOffers() As PlayersList
+        Get
+            Return _playerswithoffers
+        End Get
+        Set(ByVal value As PlayersList)
+            _playerswithoffers = value
+            RaiseProp("ClassesContainerPlayersWithOffers")
+        End Set
+    End Property
+
 
     Public Sub RaiseProp(ByVal propertie As String)
         RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertie))

@@ -8,6 +8,10 @@ Public Class RemainingMinutes
 
         _remainingMinutes = 200
 
+        If AllTeams.Teams.Count = 0 Then
+            Exit Sub
+        End If
+
         For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
 
             _remainingMinutes -= AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes
