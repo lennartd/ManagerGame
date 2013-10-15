@@ -99,7 +99,7 @@
 
         Next
 
-        PlayerContainer.AvailablePlayers = AvailablePlayers
+        PlayerContainer.AvailablePlayers = availablePlayers
 
         Dim availableCoaches As New CoachesList
 
@@ -148,11 +148,21 @@
         AllEmails = emails
 
 
+        '_______________________________________________________________________________________________________________________________________________
+
+
+        AllClassesContainer = New ClassesContainer(AllCoaches, AllDaysOfPlay, AllEmails, AllGames, AllOffers, AllPlayers, AllTeams, AllPublicProperties, _
+                                                   AllRemainingMinutes, availablePlayers, availableCoaches)
+
 
         '________________
         'TODO: entfernen!!
         Dim xmlhandler As New XmlHandler
-        xmlhandler.Save("C:\Users\Anwender\Desktop\test.xml")
+        xmlhandler.LoadNew("C:\Users\Anwender\Desktop\test.xml")
         '___________________
+
+
+
+
     End Sub
 End Class

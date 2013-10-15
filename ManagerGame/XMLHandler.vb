@@ -1,9 +1,12 @@
 ﻿Imports System.Xml
+Imports System.IO
+Imports System.Xml.Serialization
 
 Public Class XmlHandler
 
     ReadOnly _enc As New Text.UnicodeEncoding
     Dim _xmlwriter As XmlTextWriter
+    Dim _xmlreader As XmlTextReader
 
     Public Sub Save(ByVal path As String)
 
@@ -688,7 +691,6 @@ Public Class XmlHandler
             .WriteEndElement() 'PublicProperties
             '------------------------------------------------------------------------------------------------------------------------------
 
-
             .WriteEndElement() 'Data
 
             .Close()
@@ -697,12 +699,116 @@ Public Class XmlHandler
     End Sub
 
 
-    Public Sub Load()
-        Throw New NotImplementedException
+    Public Sub Load(ByVal path As String)
+
+        _xmlreader = New XmlTextReader(path)
+
+        With _xmlreader
+
+            Do While .Read()
+
+                If .NodeType = XmlNodeType.Element Then
+
+                    If .Name = "Coach" Then
+                        Dim firstname As String = Nothing
+                        Dim lastname As String = Nothing
+                        Dim birthday As String = Nothing
+                        Dim nationality As String = Nothing
+                        Dim rating As Integer = Nothing
+                        Dim currentteam As String = Nothing
+                        Dim salary As Integer = Nothing
+                        Dim offers As OffersList = New OffersList() '????
+
+                        If .Name = "Offers" Then
+                            'TODO: Implement Offers
+                            offers = New OffersList()
+                        End If
+                        If .AttributeCount > 0 Then
+                            While .MoveToNextAttribute()
+                                Select Case .Name
+                                    Case "FirstName"
+                                        firstname = .Value
+                                    Case "LastName"
+                                        lastname = .Value
+                                    Case "Birthday"
+                                        birthday = .Value
+                                    Case "Nationality"
+                                        nationality = .Value
+                                    Case "Rating"
+                                        rating = .Value
+                                    Case "CurrentTeam"
+                                        currentteam = .Value
+                                    Case "Salary"
+                                        salary = .Value
+                                End Select
+                            End While
+                        End If
+                        AllCoaches.Coaches.Add(New Coach(firstname, lastname, birthday, nationality, rating, currentteam, salary, offers))
+                    End If
+                    '------------------------------------------------------------------------------------------------------------------------
+
+                    If .Name = "DayOfPlay" Then
+                        Dim number As Integer = Nothing
+                        Dim actualdate As Date = Nothing
+                        Dim games As GamesList = Nothing
+                        If .Name = "Games" Then
+                            'TODO: implement games
+                            games = New GamesList()
+                        End If
+                        If .AttributeCount > 0 Then
+                            While .MoveToNextAttribute()
+                                Select Case .Name
+                                    Case "Number"
+                                        number = .Value
+                                    Case "ActualDate"
+                                        actualdate = .Value
+                                End Select
+                            End While
+                        End If
+                        AllDaysOfPlay.DaysOfPlay.Add(New DayOfPlay(number, actualdate, games))
+                    End If
+
+                End If
+
+            Loop
+
+        End With
     End Sub
 
 
+    Public Sub SaveNew(ByVal path As String)
 
+        'Serialize object to a text file.
+        Dim objStreamWriter As New StreamWriter(path)
+        Dim x As New XmlSerializer(AllClassesContainer.GetType())
+        x.Serialize(objStreamWriter, AllClassesContainer)
+        objStreamWriter.Close()
+    End Sub
+
+
+    Public Sub LoadNew(ByVal path As String)
+
+        'Deserialize text file to a new object.
+        Dim classescontainer As New ClassesContainer
+        Dim objStreamReader As New StreamReader(path)
+        Dim x As New XmlSerializer(classescontainer.GetType())
+        classescontainer = x.Deserialize(objStreamReader)
+        objStreamReader.Close()
+
+        AllClassesContainer = classescontainer
+
+        AllCoaches = AllClassesContainer.ClassesContainerCoaches
+        AllDaysOfPlay = AllClassesContainer.ClassesContainerDaysOfPlay
+        AllEmails = AllClassesContainer.ClassesContainerEmails
+        AllGames = AllClassesContainer.ClassesContainerGames
+        AllOffers = AllClassesContainer.ClassesContainerOffers
+        AllPlayers = AllClassesContainer.ClassesContainerPlayers
+        AllTeams = AllClassesContainer.ClassesContainerTeams
+        AllPublicProperties = AllClassesContainer.ClassesContainerPublicProperties
+        AllRemainingMinutes = AllClassesContainer.ClassesContainerRemainingMinutes
+        AvailablePlayers = AllClassesContainer.ClassesContainerAvailablePlayers
+        AvailableCoaches = AllClassesContainer.ClassesContainerAvailableCoaches
+    End Sub
 
 
 End Class

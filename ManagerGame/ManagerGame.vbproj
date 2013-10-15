@@ -66,9 +66,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClassesContainer.vb" />
     <Compile Include="BuyPlayerWindow.xaml.vb">
       <DependentUpon>BuyPlayerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ClassesContainerContainer.vb" />
     <Compile Include="Coach.vb" />
     <Compile Include="CoachContainer.vb" />
     <Compile Include="CoachesList.vb" />
