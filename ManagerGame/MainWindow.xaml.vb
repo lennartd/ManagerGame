@@ -153,15 +153,7 @@ Class MainWindow
 
     Private Sub btnLoadGame_Click(sender As Object, e As RoutedEventArgs)
 
-        'TODO: Window to load different games
-        Const path As String = "C:\Users\Anwender\Desktop\test.xml"
-
-        Dim xmlhandler As New XmlHandler
-        xmlhandler.Load(path)
-
-        Hide()
-
-        Dim w As New GameWindow
+        Dim w As New LoadWindow
         w.Show()
     End Sub
 End Class

@@ -8,6 +8,9 @@ Module PublicVariablesContainer
 
     Public AllPlayersWithOffers As PlayersList
 
+    Public Saved As Boolean
+
+    Public Const SaveDirectory As String = "C:\Users\Anwender\Documents\ManagerGame"
 
     Public Function GetTransferMethods(ByVal status As Integer)
 
@@ -151,5 +154,17 @@ Module PublicVariablesContainer
         w2.Show()
 
     End Sub
+
+    Public Function CheckFilename(ByVal filename As String) As Boolean
+
+        Dim inadmissiblecharacters() As Char = {"<", ">", "?", """", "|", "/", "*"}
+        For i = 0 To inadmissiblecharacters.Length - 1
+
+            If filename.Contains(inadmissiblecharacters(i)) Then
+                Return False
+            End If
+        Next
+        Return True
+    End Function
 
 End Module

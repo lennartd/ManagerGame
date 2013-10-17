@@ -96,6 +96,9 @@
     <Compile Include="GameWindow.xaml.vb">
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LoadWindow.xaml.vb">
+      <DependentUpon>LoadWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Offer.vb" />
     <Compile Include="OfferContainer.vb" />
     <Compile Include="OffersList.vb" />
@@ -112,6 +115,9 @@
       <DependentUpon>ResultsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SalaryToEuroConverter.vb" />
+    <Compile Include="SaveWindow.xaml.vb">
+      <DependentUpon>SaveWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Score.vb" />
     <Compile Include="SelectedItemToVisibilityConverter.vb" />
     <Compile Include="SignCoachWindow.xaml.vb">
@@ -143,6 +149,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="LoadWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -156,6 +166,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ResultsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SaveWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
