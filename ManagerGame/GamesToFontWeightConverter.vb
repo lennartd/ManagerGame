@@ -7,8 +7,8 @@ Public Class GamesToFontWeightConverter
         Dim gameOpponentHome As String = values(0).ToString
         Dim gameOpponentGuest As String = values(1).ToString
 
-        If gameOpponentHome.Contains(AllTeams.Teams(CurrentTeamIndex).TeamName) Or _
-            gameOpponentGuest.Contains(AllTeams.Teams(CurrentTeamIndex).TeamName) Then
+        If gameOpponentHome.Contains(AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamName) Or _
+            gameOpponentGuest.Contains(AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamName) Then
 
             Dim thickness As New Thickness(2)
             Return thickness

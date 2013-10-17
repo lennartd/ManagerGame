@@ -15,7 +15,7 @@ Public Class NewGameWindow
         For i = 0 To AllTeams.Teams.Count - 1
 
             If AllTeams.Teams(i).TeamName = cmbbxSelectTeam.Text Then
-                CurrentTeamIndex = i
+                AllPublicProperties.PublicPropertyCurrentTeamIndex = i
             End If
         Next
 

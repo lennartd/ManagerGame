@@ -3,7 +3,7 @@ Class MainWindow
 
     Private Sub btnNewGame_Click(sender As Object, e As RoutedEventArgs)
 
-        CurrentTeamIndex = Nothing
+        AllPublicProperties.PublicPropertyCurrentTeamIndex = Nothing
         AllPlayersWithOffers = New PlayersList
         AllOffers = New OffersList
 
@@ -131,7 +131,7 @@ Class MainWindow
         AllDaysOfPlay = daysOfPlayList
 
 
-        Dim publicProperties1 As New PublicProperties(#1/1/2000#)
+        Dim publicProperties1 As New PublicProperties(#1/1/2000#, 0)
         AllPublicProperties = publicProperties1
 
         Dim email1 As New Email(#1/1/2000#, "FC Bayern München Basketball", "Transfer", "neue Transfernews!", False)
@@ -146,7 +146,6 @@ Class MainWindow
 
         '____________________________________________________________________________________________________
 
-        Hide()
 
         Dim w As New NewGameWindow
         w.Show()

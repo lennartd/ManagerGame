@@ -6,7 +6,7 @@ Public Class PlayerCurrentTeamToDirectionConverter
 
         Dim currentTeamName As String = DirectCast(value, String)
 
-        If currentTeamName = AllTeams.Teams(CurrentTeamIndex).TeamName Then
+        If currentTeamName = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamName Then
 
             Return "Eingehend"
         Else

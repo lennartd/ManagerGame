@@ -12,9 +12,9 @@ Public Class RemainingMinutes
             Exit Sub
         End If
 
-        For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+        For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-            _remainingMinutes -= AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes
+            _remainingMinutes -= AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes
         Next
     End Sub
 

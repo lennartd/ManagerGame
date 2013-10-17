@@ -58,24 +58,24 @@ Public Class BuyPlayerWindow
 
         Next
 
-        lblTeamMoney.DataContext = AllTeams.Teams(CurrentTeamIndex)
+        lblTeamMoney.DataContext = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex)
 
 
-        For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+        For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-            If _playerName = AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).ToString Then
+            If _playerName = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).ToString Then
 
-                MsgBox(_playerName & " ist bereits bei den " & AllTeams.Teams(CurrentTeamIndex).TeamName & "!")
+                MsgBox(_playerName & " ist bereits bei den " & AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamName & "!")
                 Exit Sub
             End If
         Next
 
         For i = 0 To AllPlayers.Players(_playerIndex).PlayerOffers.Offers.Count - 1
 
-            If AllPlayers.Players(_playerIndex).PlayerOffers.Offers(i).OfferBiddingTeam = AllTeams.Teams(CurrentTeamIndex).TeamName Then
+            If AllPlayers.Players(_playerIndex).PlayerOffers.Offers(i).OfferBiddingTeam = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamName Then
 
                 If Not AllPlayers.Players(_playerIndex).PlayerOffers.Offers(i).OfferStatus = 6 Then
-                    MsgBox("Die " & AllTeams.Teams(CurrentTeamIndex).TeamName & " haben " & _
+                    MsgBox("Die " & AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamName & " haben " & _
                            _playerName & " bereits ein Angebot unterbreitet!")
                     Exit Sub
                 End If
@@ -139,8 +139,8 @@ Public Class BuyPlayerWindow
         End If
 
 
-        If AllTeams.Teams(CurrentTeamIndex).TeamMoney < _salaryEuroConv.ConvertBack(txtbxRedemptionValue.Text, Nothing, Nothing, Nothing) Then
-            MsgBox("Die " & AllTeams.Teams(CurrentTeamIndex).TeamName & " haben nicht genügend verfügbares Vermögen um eine Ablösesumme von " _
+        If AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamMoney < _salaryEuroConv.ConvertBack(txtbxRedemptionValue.Text, Nothing, Nothing, Nothing) Then
+            MsgBox("Die " & AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamName & " haben nicht genügend verfügbares Vermögen um eine Ablösesumme von " _
                    & txtbxRedemptionValue.Text & " zu bezahlen.")
             Exit Sub
         End If
@@ -159,15 +159,15 @@ Public Class BuyPlayerWindow
         Next
 
         Dim newOffer As New Offer(_playerName, playerTeamName, AllPublicProperties.PublicPropertyCurrentDate, AllPublicProperties.PublicPropertyCurrentDate, txtbxRedemptionValue.Text, _
-                               txtbxSalaryValue.Text, AllTeams.Teams(CurrentTeamIndex).TeamName, _
+                               txtbxSalaryValue.Text, AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamName, _
                                contractUntil, 0)
 
         AllPlayers.Players(_playerIndex).PlayerOffers.Offers.Add(newOffer)
 
-        For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+        For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-            If _playerName = AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).ToString Then
-                AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerOffers.Offers.Add(newOffer)
+            If _playerName = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).ToString Then
+                AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerOffers.Offers.Add(newOffer)
             End If
 
         Next

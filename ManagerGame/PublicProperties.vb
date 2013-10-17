@@ -8,8 +8,8 @@ Public Class PublicProperties
 
     End Sub
 
-    Public Sub New(ByVal currentDate As Date)
-        _currentDate = currentDate
+    Public Sub New(ByVal currentDate As Date, ByVal currentteamindex As Integer)
+        _currentDate = currentDate : _currentTeamIndex = currentteamindex
     End Sub
 
     Private _currentDate As Date
@@ -20,6 +20,17 @@ Public Class PublicProperties
         Set(ByVal value As Date)
             _currentDate = value
             RaiseProp("PublicPropertyCurrentDate")
+        End Set
+    End Property
+
+    Private _currentTeamIndex As Integer
+    Public Property PublicPropertyCurrentTeamIndex() As Integer
+        Get
+            Return _currentTeamIndex
+        End Get
+        Set(ByVal value As Integer)
+            _currentTeamIndex = value
+            RaiseProp("PublicPropertyCurrentTeamIndex")
         End Set
     End Property
 

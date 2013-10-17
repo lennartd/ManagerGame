@@ -37,8 +37,8 @@ Public Class SignCoachWindow
 
                 If coachName = AvailableCoaches.Coaches(i).ToString Then
 
-                    AllTeams.Teams(CurrentTeamIndex).TeamCoach = AvailableCoaches.Coaches(i)
-                    AllTeams.Teams(CurrentTeamIndex).TeamCoach.CoachSalary = converter2.ConvertBack(converter.Convert(AllCoaches.Coaches(coachIndex).CoachRating, Nothing, Nothing, Nothing), Nothing, Nothing, Nothing)
+                    AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamCoach = AvailableCoaches.Coaches(i)
+                    AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamCoach.CoachSalary = converter2.ConvertBack(converter.Convert(AllCoaches.Coaches(coachIndex).CoachRating, Nothing, Nothing, Nothing), Nothing, Nothing, Nothing)
 
                     AvailableCoaches.Coaches.RemoveAt(i)
                 End If
@@ -47,7 +47,7 @@ Public Class SignCoachWindow
             Dim w = TryCast(Application.Current.Windows.Cast(Of Window)().FirstOrDefault(Function(window) TypeOf window Is GameWindow), GameWindow)
 
             w.stckpnCoach.DataContext = Nothing
-            w.stckpnCoach.DataContext = AllTeams.Teams(CurrentTeamIndex).TeamCoach
+            w.stckpnCoach.DataContext = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamCoach
 
             w.Close()
 

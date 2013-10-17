@@ -12,14 +12,14 @@ Public Class TransferNegotiationsWindow
 
         For i = 0 To AllOffers.Offers.Count - 1
 
-            If AllOffers.Offers(i).OfferBiddingTeam = AllTeams.Teams(CurrentTeamIndex).TeamName Then
+            If AllOffers.Offers(i).OfferBiddingTeam = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamName Then
 
                 _allCurrentTeamOffers.Offers.Add(AllOffers.Offers(i))
             Else
 
-                For j = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+                For j = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-                    If AllOffers.Offers(i).OfferPlayerName = AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(j).ToString Then
+                    If AllOffers.Offers(i).OfferPlayerName = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(j).ToString Then
 
                         _allCurrentTeamOffers.Offers.Add(AllOffers.Offers(i))
                     End If
@@ -52,7 +52,7 @@ Public Class TransferNegotiationsWindow
 
         Dim methodsListArray() As List(Of String) = GetTransferMethods(_allCurrentTeamOffers.Offers(_selectedPlayerIndex).OfferStatus)
 
-        If _allCurrentTeamOffers.Offers(_selectedPlayerIndex).OfferCurrentTeamName = AllTeams.Teams(CurrentTeamIndex).TeamName Then
+        If _allCurrentTeamOffers.Offers(_selectedPlayerIndex).OfferCurrentTeamName = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamName Then
             cmbbxSelectMethods.DataContext = methodsListArray(1)
         Else
             cmbbxSelectMethods.DataContext = methodsListArray(0)

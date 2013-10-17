@@ -4,8 +4,6 @@ Module PublicVariablesContainer
     Public AllPublicProperties As PublicProperties
 
 
-    Public CurrentTeamIndex As Integer
-
     Public AllRemainingMinutes As RemainingMinutesList
 
     Public AllPlayersWithOffers As PlayersList
@@ -145,7 +143,7 @@ Module PublicVariablesContainer
         Dim w = TryCast(Application.Current.Windows.Cast(Of Window)().FirstOrDefault(Function(window) TypeOf window Is GameWindow), GameWindow)
 
         w.stckpnCoach.DataContext = Nothing
-        w.stckpnCoach.DataContext = AllTeams.Teams(CurrentTeamIndex).TeamCoach
+        w.stckpnCoach.DataContext = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamCoach
 
         w.Close()
 
