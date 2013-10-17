@@ -6,15 +6,37 @@ Imports System.Windows.Data
 
 Public Class GameWindow
 
+    Private Sub GameWindow_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+
+        If Saved = True Then
+            Saved = False
+            Exit Sub
+        End If
+        Dim result As MsgBoxResult = MsgBox("Wollen Sie das Spiel Speichern? Wenn Sie das Spiel nicht speichern gehen alle ungespeicherten Änderungen verloren!", _
+                                            MsgBoxStyle.YesNoCancel, "Speichern?")
+
+        If result = MsgBoxResult.Yes Then
+            e.Cancel = True
+            Dim w As New SaveWindow
+            w.Show()
+        ElseIf result = MsgBoxResult.No Then
+            e.Cancel = False
+            Application.Current.Shutdown()
+        Else
+            e.Cancel = True
+        End If
+
+    End Sub
+
     Private Sub GameWindow_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
 
-        lstvwRotation.DataContext = AllTeams.Teams(CurrentTeamIndex).TeamPlayers
+        lstvwRotation.DataContext = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers
 
         lblRemainingMinutes.DataContext = AllRemainingMinutes.RemainingMinutes(0) 'korrekt?
 
-        stckpnCoach.DataContext = AllTeams.Teams(CurrentTeamIndex).TeamCoach
+        stckpnCoach.DataContext = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamCoach
 
-        btnReleaseCoach.DataContext = AllTeams.Teams(CurrentTeamIndex)
+        btnReleaseCoach.DataContext = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex)
 
         lblCurrentDate.DataContext = AllPublicProperties
 
@@ -50,24 +72,24 @@ Public Class GameWindow
             Dim selectedPlayerNewRotationNumber As Integer = Nothing
             Dim selectedPlayerName As String = lstvwRotation.SelectedValue.ToString
 
-            For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+            For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-                If selectedPlayerName = AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).ToString Then
+                If selectedPlayerName = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).ToString Then
 
-                    AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber -= 1
-                    selectedPlayerNewRotationNumber = AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber
+                    AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber -= 1
+                    selectedPlayerNewRotationNumber = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber
                 End If
 
             Next
 
 
 
-            For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+            For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-                If selectedPlayerNewRotationNumber = AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber Then
+                If selectedPlayerNewRotationNumber = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber Then
 
-                    If Not selectedPlayerName = AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).ToString Then
-                        AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber += 1
+                    If Not selectedPlayerName = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).ToString Then
+                        AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber += 1
                     End If
 
                 End If
@@ -86,23 +108,23 @@ Public Class GameWindow
             Dim selectedPlayerNewRotationNumber As Integer = Nothing
             Dim selectedPlayerName As String = lstvwRotation.SelectedValue.ToString
 
-            For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+            For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-                If selectedPlayerName = AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).ToString Then
+                If selectedPlayerName = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).ToString Then
 
-                    AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber += 1
-                    selectedPlayerNewRotationNumber = AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber
+                    AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber += 1
+                    selectedPlayerNewRotationNumber = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber
                 End If
 
             Next
 
 
-            For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+            For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-                If selectedPlayerNewRotationNumber = AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber Then
+                If selectedPlayerNewRotationNumber = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber Then
 
-                    If Not selectedPlayerName = AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).ToString Then
-                        AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber -= 1
+                    If Not selectedPlayerName = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).ToString Then
+                        AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber -= 1
                     End If
 
                 End If
@@ -126,18 +148,18 @@ Public Class GameWindow
         End If
 
         Dim allMinutes As Integer = 0
-        For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
-            allMinutes += AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes
+        For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
+            allMinutes += AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes
         Next
 
         Dim selectedPlayerName As String = lstvwRotation.SelectedValue.ToString
 
-        For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+        For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-            If selectedPlayerName = AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).ToString Then
+            If selectedPlayerName = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).ToString Then
 
-                If allMinutes < 200 AndAlso AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes < 40 Then
-                    AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes += 1
+                If allMinutes < 200 AndAlso AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes < 40 Then
+                    AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes += 1
                     AllRemainingMinutes.RemainingMinutes(0).RotationRemainingMinutes -= 1
                 End If
 
@@ -152,17 +174,17 @@ Public Class GameWindow
             Exit Sub
         End If
 
-        For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+        For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
         Next
 
         Dim selectedPlayerName As String = lstvwRotation.SelectedValue.ToString
 
-        For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+        For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-            If selectedPlayerName = AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).ToString Then
+            If selectedPlayerName = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).ToString Then
 
-                If AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes > 0 Then
-                    AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes -= 1
+                If AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes > 0 Then
+                    AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes -= 1
                     AllRemainingMinutes.RemainingMinutes(0).RotationRemainingMinutes += 1
                 End If
 
@@ -178,7 +200,7 @@ Public Class GameWindow
 
     Private Sub btnBuyPlayer_Click(sender As Object, e As RoutedEventArgs)
 
-        If AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count >= 15 Then
+        If AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count >= 15 Then
 
             MsgBox("Der Kader hat bereits 15 Spieler.")
             Exit Sub
@@ -206,16 +228,16 @@ Public Class GameWindow
 
         If result = MessageBoxResult.Yes Then
 
-            For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+            For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-                If selectedPlayerName = AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).ToString Then
+                If selectedPlayerName = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).ToString Then
 
-                    selectedPlayerRotationNumber = AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber
+                    selectedPlayerRotationNumber = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber
 
-                    AllTeams.Teams(CurrentTeamIndex).TeamAdditionalSalary += _
-                        AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerSalary
+                    AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamAdditionalSalary += _
+                        AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerSalary
 
-                    AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.RemoveAt(i)
+                    AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.RemoveAt(i)
                     Exit For
                 End If
             Next
@@ -236,11 +258,11 @@ Public Class GameWindow
             Next
 
 
-            For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+            For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-                If AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber > selectedPlayerRotationNumber Then
+                If AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber > selectedPlayerRotationNumber Then
 
-                    AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber -= 1
+                    AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber -= 1
                 End If
             Next
 
@@ -251,7 +273,7 @@ Public Class GameWindow
 
         If btnReleaseCoach.Content = "Trainer entlassen" Then
 
-            Dim result As MessageBoxResult = MsgBox(AllTeams.Teams(CurrentTeamIndex).TeamCoach.ToString & _
+            Dim result As MessageBoxResult = MsgBox(AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamCoach.ToString & _
                                                     " wirklich entlassen? (Das Gehalt muss weiter gezahlt werden!)", _
                                                     MsgBoxStyle.YesNoCancel)
 
@@ -259,7 +281,7 @@ Public Class GameWindow
 
                 For i = 0 To AllCoaches.Coaches.Count - 1
 
-                    If AllCoaches.Coaches(i).ToString = AllTeams.Teams(CurrentTeamIndex).TeamCoach.ToString Then
+                    If AllCoaches.Coaches(i).ToString = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamCoach.ToString Then
 
                         AllCoaches.Coaches(i).CoachSalary = Nothing
                         AvailableCoaches.Coaches.Add(AllCoaches.Coaches(i))
@@ -267,13 +289,13 @@ Public Class GameWindow
                     End If
                 Next
 
-                AllTeams.Teams(CurrentTeamIndex).TeamAdditionalSalary += AllTeams.Teams(CurrentTeamIndex).TeamCoach.CoachSalary
+                AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamAdditionalSalary += AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamCoach.CoachSalary
 
-                AllTeams.Teams(CurrentTeamIndex).TeamCoach = New Coach
+                AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamCoach = New Coach
 
 
                 stckpnCoach.DataContext = Nothing
-                stckpnCoach.DataContext = AllTeams.Teams(CurrentTeamIndex).TeamCoach
+                stckpnCoach.DataContext = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamCoach
 
                 stckpnCoach.Visibility = Visibility.Collapsed
 
@@ -309,10 +331,10 @@ Public Class GameWindow
 
                 For j = 0 To AllDaysOfPlay.DaysOfPlay(i).DayOfPlayGames.Games.Count - 1
 
-                    If AllDaysOfPlay.DaysOfPlay(i).DayOfPlayGames.Games(j).GameOpponentHome.ToString = AllTeams.Teams(CurrentTeamIndex).TeamName Or _
-                        AllDaysOfPlay.DaysOfPlay(i).DayOfPlayGames.Games(j).GameOpponentGuest.ToString = AllTeams.Teams(CurrentTeamIndex).TeamName Then
+                    If AllDaysOfPlay.DaysOfPlay(i).DayOfPlayGames.Games(j).GameOpponentHome.ToString = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamName Or _
+                        AllDaysOfPlay.DaysOfPlay(i).DayOfPlayGames.Games(j).GameOpponentGuest.ToString = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamName Then
 
-                        Dim result As MsgBoxResult = MsgBox("Die " & AllTeams.Teams(CurrentTeamIndex).TeamName _
+                        Dim result As MsgBoxResult = MsgBox("Die " & AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamName _
                                                             & " haben heute ein Spiel. Simulation fortfahren?", _
                                                             MsgBoxStyle.YesNoCancel)
 
@@ -362,9 +384,9 @@ Public Class GameWindow
 
 
             Dim playerIsOnCurrentTeam As Boolean = False
-            For j = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+            For j = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-                If AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(j).ToString = currentPlayer.ToString Then
+                If AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(j).ToString = currentPlayer.ToString Then
                     playerIsOnCurrentTeam = True
                 End If
             Next
@@ -374,7 +396,7 @@ Public Class GameWindow
             If CheckIfOfferShouldBeDealtWith(AllOffers.Offers(i).OfferLastDealtDate) = True Then
 
                 'deal with offer
-                'TODO: ui sends offers himself
+                'TODO: simulate transfers between ui teams
                 Select Case AllOffers.Offers(i).OfferStatus
                     '__________________________
                     '
@@ -458,7 +480,7 @@ Public Class GameWindow
 #Region "CheckSimulateGameRequirements"
     Private Function CheckSimuulateGamesRequirements() As Boolean
 
-        If AllTeams.Teams(CurrentTeamIndex).TeamCoach.CoachLastName = Nothing Then
+        If AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamCoach.CoachLastName = Nothing Then
             MsgBox("Deine Mannschaft kann ohne Trainer nicht antreten!")
             Return False
         ElseIf Not AllRemainingMinutes.RemainingMinutes(0).RotationRemainingMinutes = 0 Then
@@ -478,11 +500,11 @@ Public Class GameWindow
     End Function
 
     Private Function CheckIfStaringFiveHasMinutes() As Boolean
-        For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+        For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-            If AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber <= 5 Then
+            If AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber <= 5 Then
 
-                If AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes = 0 Then
+                If AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes = 0 Then
                     Return False
                 End If
             End If
@@ -492,10 +514,10 @@ Public Class GameWindow
 
     Private Function GetNumberOfGermanPlayers() As Integer
         Dim count As Integer = 0
-        For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+        For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-            If AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes > 0 Then
-                If AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerNationality = "Deutschland" Then
+            If AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes > 0 Then
+                If AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerNationality = "Deutschland" Then
                     count += 1
                 End If
             End If
@@ -505,16 +527,16 @@ Public Class GameWindow
 
     Private Function GetNumberOfPlayersWithMinutes() As Integer
         Dim count As Integer = 0
-        For i = 0 To AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players.Count - 1
+        For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-            If AllTeams.Teams(CurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes > 0 Then
+            If AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes > 0 Then
                 count += 1
             End If
         Next
         Return count
     End Function
 #End Region
-    
+
     Private Sub UpdateOfferLastDealtDate(ByVal offerIndex As Integer)
 
         AllOffers.Offers(offerIndex).OfferLastDealtDate = AllPublicProperties.PublicPropertyCurrentDate

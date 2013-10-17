@@ -127,8 +127,8 @@
 
                     <StackPanel Margin="15,5,5,5">
                         <Label FontSize="16">Spiele heute</Label>
-                        <ListBox Name="lstbxGamesToday" ItemsSource="{Binding Games}" >
-                            <ListBox.ItemTemplate>
+                        <ItemsControl Name="lstbxGamesToday" ItemsSource="{Binding Games}" >
+                            <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                 
                                     <Border BorderBrush="Red" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -147,8 +147,8 @@
                                         </StackPanel>
                                     </Border>
                                 </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
                 </Grid>
 
