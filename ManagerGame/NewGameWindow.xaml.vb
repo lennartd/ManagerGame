@@ -19,6 +19,7 @@ Public Class NewGameWindow
             End If
         Next
 
+        AllRemainingMinutes.RemainingMinutes.Add(New RemainingMinutes())
 
         Dim w As New GameWindow
         w.Show()

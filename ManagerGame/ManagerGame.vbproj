@@ -49,10 +49,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.88.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\System.Data.SQLite\2012\bin\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
@@ -124,6 +127,8 @@
       <DependentUpon>SignCoachWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SizeToCentimeterConverter.vb" />
+    <Compile Include="SQLiteDatabase.vb" />
+    <Compile Include="SQLiteHandler.vb" />
     <Compile Include="StatusIntegerToStringConverter.vb" />
     <Compile Include="Team.vb" />
     <Compile Include="TeamCoachTobtnReleaseCoachContentConverter.vb" />
