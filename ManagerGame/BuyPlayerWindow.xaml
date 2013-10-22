@@ -2,7 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:local="clr-namespace:ManagerGame"
-    Title="Spieler kaufen" Height="600" Width="1039.5">
+    Title="Spieler kaufen" Height="600" Width="1055.918">
 
     <Window.Resources>
         <local:SalaryToEuroConverter x:Key="SalaryEuroConv"/>
@@ -21,51 +21,55 @@
 
         <Grid Name="grdRow1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="105*"/>
-                <ColumnDefinition Width="67*"/>
+                <ColumnDefinition Width="219*"/>
+                <ColumnDefinition Width="173*"/>
+                <ColumnDefinition Width="132*"/>
             </Grid.ColumnDefinitions>
 
             <ComboBox Name="cmbbxChooseSelection" Margin="5" >
                 <ComboBoxItem Name="cmbbxitemAllplayer" Selected="cmbbxitemAllPlayers_Selected">Alle Spieler</ComboBoxItem>
                 <ComboBoxItem Name="cmbbxitemAvailablePlayers" Selected="cmbbxitemAvailablePlayers_Selected">Verfügbare Spieler</ComboBoxItem>
             </ComboBox>
-            
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0" Width="244">
+                <Label VerticalAlignment="Center">Suche:</Label>
+                <TextBox Name="txtbxSearch" Width="200" VerticalAlignment="Center" TextChanged="txtbxSearch_TextChanged"></TextBox>
+            </StackPanel>
             <Button Name="btnStartTransfer" Click="btnStartTransfer_Click" Grid.Column="1" Margin="5" Content="Verhandlungen beginnen" Visibility="{Binding SelectedItem, Converter={StaticResource SelectedItemVisibilityConv}}"></Button>
         </Grid>
 
         <Grid Name="grdRow2" Grid.Row="1">
-        <ListView Name="lstvwPlayers" ItemsSource="{Binding Players}">
-            <ListView.View>
-                <GridView>
+            <ListView Name="lstvwPlayers" ItemsSource="{Binding Players}">
+                <ListView.View>
+                    <GridView>
 
-                    <GridViewColumn Width="150" Header="Spieler"
+                        <GridViewColumn Width="150" Header="Spieler"
                                     DisplayMemberBinding="{Binding}"/>
-                    <GridViewColumn Width="75" Header="Geburtstag"
+                        <GridViewColumn Width="75" Header="Geburtstag"
                                     DisplayMemberBinding="{Binding Path=PlayerBirthday}"/>
-                    <GridViewColumn Width="100" Header="Nationalität"
+                        <GridViewColumn Width="100" Header="Nationalität"
                                     DisplayMemberBinding="{Binding Path=PlayerNationality}"/>
-                    <GridViewColumn Width="50" Header="Größe"
+                        <GridViewColumn Width="50" Header="Größe"
                                     DisplayMemberBinding="{Binding Path=PlayerSize, Converter={StaticResource SizeCentimeterConv}}"/>
-                    <GridViewColumn Width="50" Header="Gewicht"
+                        <GridViewColumn Width="50" Header="Gewicht"
                                     DisplayMemberBinding="{Binding Path=PlayerWeight, Converter={StaticResource WeightKilogrammConv}}"/>
-                    <GridViewColumn Width="50" Header="Position"
+                        <GridViewColumn Width="50" Header="Position"
                                     DisplayMemberBinding="{Binding Path=PlayerPosition}"/>
-                    <GridViewColumn Width="75" Header="2. Position"
+                        <GridViewColumn Width="75" Header="2. Position"
                                     DisplayMemberBinding="{Binding Path=PlayerSecondPosition}"/>
-                    <GridViewColumn Width="50" Header="Wertung"
+                        <GridViewColumn Width="50" Header="Wertung"
                                     DisplayMemberBinding="{Binding Path=PlayerRating}"/>
-                    <GridViewColumn Width="200" Header="Team"
+                        <GridViewColumn Width="200" Header="Team"
                                     DisplayMemberBinding="{Binding Path=PlayerCurrentTeam}"/>
-                    <GridViewColumn Width="75" Header="Gehalt"
+                        <GridViewColumn Width="75" Header="Gehalt"
                                     DisplayMemberBinding="{Binding Path=PlayerSalary, Converter={StaticResource SalaryEuroConv}}"/>
-                    <GridViewColumn Width="75" Header="Vertrag bis"
+                        <GridViewColumn Width="75" Header="Vertrag bis"
                                     DisplayMemberBinding="{Binding Path=PlayerContractUntil}"/>
-                    <GridViewColumn Width="60" Header="Angebote"
+                        <GridViewColumn Width="60" Header="Angebote"
                                     DisplayMemberBinding="{Binding Path=PlayerOffers.Offers.Count}"/>
 
                     </GridView>
-            </ListView.View>
-        </ListView>
+                </ListView.View>
+            </ListView>
         </Grid>
 
         <Grid Name="grdRow3" Grid.Row="2" Visibility="Hidden">
@@ -87,7 +91,7 @@
                 <Label Margin="5,5,5,0" FontWeight="Bold">Name:</Label>
                 <Label Name="lblName" Margin="0,5,5,5" Content="{Binding SelectedValue}"></Label>
             </StackPanel>
-            
+
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                 <Label Margin="0,5,0,5" FontWeight="Bold">Status:</Label>
                 <Label Name="lblStatus" Margin="0,5,5,5" Content="{Binding}"></Label>
@@ -99,17 +103,17 @@
             </StackPanel>
 
             <Label Name="lblRedemption" Grid.Row="1" Margin="5">Ablösesumme:</Label>
-                <Slider Grid.Row="1" Grid.Column="1" Name="sldrRedemption" Maximum="100000" Minimum="500" SmallChange="10" TickFrequency="10" LargeChange="100" Width="300" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="1" Grid.Column="2" Name="txtbxRedemptionValue" Text="{Binding Value, Converter={StaticResource DoubleIntegerEuroConv}}" Width="100
+            <Slider Grid.Row="1" Grid.Column="1" Name="sldrRedemption" Maximum="100000" Minimum="500" SmallChange="10" TickFrequency="10" LargeChange="100" Width="300" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="1" Grid.Column="2" Name="txtbxRedemptionValue" Text="{Binding Value, Converter={StaticResource DoubleIntegerEuroConv}}" Width="100
                          " HorizontalAlignment="Left" Margin="5"></TextBox>
 
-                <Label Grid.Row="2" Margin="5">Gehalt (monatlich):</Label>
-                <Slider Grid.Row="2" Grid.Column="1" Name="sldrSalary" Maximum="20000" Minimum="500" SmallChange="10" TickFrequency="10" LargeChange="100" Width="300" VerticalAlignment="Center"></Slider>
-                <TextBox Grid.Row="2" Grid.Column ="2"  Name="txtbxSalaryValue" Text="{Binding Value, Converter={StaticResource DoubleIntegerEuroConv}}" Width="100" HorizontalAlignment="Left" Margin="5"></TextBox>
+            <Label Grid.Row="2" Margin="5">Gehalt (monatlich):</Label>
+            <Slider Grid.Row="2" Grid.Column="1" Name="sldrSalary" Maximum="20000" Minimum="500" SmallChange="10" TickFrequency="10" LargeChange="100" Width="300" VerticalAlignment="Center"></Slider>
+            <TextBox Grid.Row="2" Grid.Column ="2"  Name="txtbxSalaryValue" Text="{Binding Value, Converter={StaticResource DoubleIntegerEuroConv}}" Width="100" HorizontalAlignment="Left" Margin="5"></TextBox>
 
-                <Label Grid.Row="3" Margin="5">Vertragsdauer bis:</Label>
-                <TextBox Grid.Row="3" Grid.Column="2" Name="txtbxContractUntil" Width="100" Margin="5" HorizontalAlignment="Left"></TextBox>
-            
+            <Label Grid.Row="3" Margin="5">Vertragsdauer bis:</Label>
+            <TextBox Grid.Row="3" Grid.Column="2" Name="txtbxContractUntil" Width="100" Margin="5" HorizontalAlignment="Left"></TextBox>
+
             <Grid Grid.Row="4" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -120,6 +124,6 @@
             </Grid>
 
         </Grid>
-        
+
     </Grid>
 </Window>

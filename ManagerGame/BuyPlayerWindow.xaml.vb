@@ -189,4 +189,18 @@ Public Class BuyPlayerWindow
     End Sub
 
 
+    Private Sub txtbxSearch_TextChanged(sender As Object, e As TextChangedEventArgs)
+
+        Dim searchedplayers As New PlayersList
+
+        For i = 0 To AllPlayers.Players.Count - 1
+
+            If AllPlayers.Players(i).ToString.ToLower.Contains(txtbxSearch.Text.ToLower()) Then
+
+                searchedplayers.Players.Add(AllPlayers.Players(i))
+            End If
+        Next
+
+        lstvwPlayers.DataContext = searchedplayers
+    End Sub
 End Class
