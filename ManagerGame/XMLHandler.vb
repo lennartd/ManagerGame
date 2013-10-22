@@ -11,7 +11,12 @@ Public Class XmlHandler
         'Serialize object to a text file.
         Dim objStreamWriter As New StreamWriter(path)
         Dim x As New XmlSerializer(AllClassesContainer.GetType())
-        x.Serialize(objStreamWriter, AllClassesContainer)
+        Try
+            x.Serialize(objStreamWriter, AllClassesContainer)
+        Catch ex As Exception
+            MsgBox("Fehler beim Schreiben der Datei!")
+        End Try
+
         objStreamWriter.Close()
     End Sub
 
@@ -22,7 +27,12 @@ Public Class XmlHandler
         Dim classescontainer As New ClassesContainer
         Dim objStreamReader As New StreamReader(path)
         Dim x As New XmlSerializer(classescontainer.GetType())
-        classescontainer = x.Deserialize(objStreamReader)
+        Try
+            classescontainer = x.Deserialize(objStreamReader)
+        Catch ex As Exception
+            MsgBox("Fehler beim Lesen der Datei!")
+        End Try
+
         objStreamReader.Close()
 
         classescontainer.InitializeOriginalObjects()
