@@ -2,10 +2,17 @@
 
 Public Class SqLiteHandler
 
-    ReadOnly _sqlitedatabase As SQLiteDatabase = New SQLiteDatabase("C:\Users\Anwender\Downloads\ManagerGameData")
+    ReadOnly _sqlitedatabase As SQLiteDatabase = New SQLiteDatabase("C:\Users\Anwender\Documents\Lennart\Programmieren\Visual Studio 2012\ManagerGame\ManagerGameData")
 
     Dim _allGames1 As GamesList = New GamesList()
     Dim _allGames2 As GamesList = New GamesList()
+    Dim _allGames3 As GamesList = New GamesList()
+    Dim _allGames4 As GamesList = New GamesList()
+    Dim _allGames5 As GamesList = New GamesList()
+    Dim _allGames6 As GamesList = New GamesList()
+    Dim _allGames7 As GamesList = New GamesList()
+    Dim _allGames8 As GamesList = New GamesList()
+    Dim _allGames9 As GamesList = New GamesList()
 
     Public Sub GetData()
 
@@ -15,6 +22,13 @@ Public Class SqLiteHandler
         tablenames.Add("AllTeams")
         tablenames.Add("Games1")
         tablenames.Add("Games2")
+        tablenames.Add("Games3")
+        tablenames.Add("Games4")
+        tablenames.Add("Games5")
+        tablenames.Add("Games6")
+        tablenames.Add("Games7")
+        tablenames.Add("Games8")
+        tablenames.Add("Games9")
         tablenames.Add("AllDaysOfPlay")
         tablenames.Add("AllPublicProperties")
 
@@ -95,6 +109,20 @@ Public Class SqLiteHandler
                     games = _allGames1
                 Case 2
                     games = _allGames2
+                Case 3
+                    games = _allGames3
+                Case 4
+                    games = _allGames4
+                Case 5
+                    games = _allGames5
+                Case 6
+                    games = _allGames6
+                Case 7
+                    games = _allGames7
+                Case 8
+                    games = _allGames8
+                Case 9
+                    games = _allGames9
             End Select
 
             daysofplay.DaysOfPlay.Add(New DayOfPlay(number, actualdate, games))
@@ -219,6 +247,10 @@ Public Class SqLiteHandler
                 End If
             Next
 
+            If opponenthometeam.TeamName = Nothing Or opponentguestteam.TeamName = Nothing Then
+                Throw New Exception("vermutlich falscher Team-Name in Datenbank")
+            End If
+
             games.Games.Add(New Game(opponenthometeam, opponentguestteam, New Score()))
             AllGames.Games.Add(New Game(opponenthometeam, opponentguestteam, New Score()))
         Next
@@ -228,6 +260,22 @@ Public Class SqLiteHandler
                 _allGames1 = games
             Case 2
                 _allGames2 = games
+            Case 3
+                _allGames3 = games
+            Case 4
+                _allGames4 = games
+            Case 5
+                _allGames5 = games
+            Case 6
+                _allGames6 = games
+            Case 7
+                _allGames7 = games
+            Case 8
+                _allGames8 = games
+            Case 9
+                _allGames9 = games
+            Case Else
+                Throw New NotImplementedException()
         End Select
     End Sub
 
