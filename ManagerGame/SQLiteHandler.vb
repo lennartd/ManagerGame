@@ -41,7 +41,8 @@ Public Class SqLiteHandler
                 result = _sqlitedatabase.GetDataTable(query)
 
             Catch e As Exception
-
+                MsgBox("ManagerGame kann nicht auf seine Datenbank zugreifen!")
+                Application.Current.Shutdown()
             End Try
 
             Select Case result.TableName
@@ -49,7 +50,7 @@ Public Class SqLiteHandler
                     GetAllCoaches(result)
                 Case "AllTeams"
                     GetAllTeams(result)
-                Case "Games1", "Games2"
+                Case "Games1", "Games2", "Games3", "Games4", "Games5", "Games6", "Games7", "Games8", "Games9"
                     Dim number As Integer = CInt(result.TableName.Split("s")(1))
                     GetGames(result, number)
                 Case "AllPlayers"

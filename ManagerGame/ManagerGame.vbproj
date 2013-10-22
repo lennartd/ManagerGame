@@ -250,6 +250,21 @@
   <ItemGroup>
     <Resource Include="Images\FC Bayern München Basketball.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\ALBA Berlin.png" />
+    <Resource Include="Images\Artland Dragons.png" />
+    <Resource Include="Images\Eisbären Bremerhaven.png" />
+    <Resource Include="Images\FRAPORT SKYLINERS Frankfurt.png" />
+    <Resource Include="Images\medi bayreuth.png" />
+    <Resource Include="Images\Mitteldeutscher BC.png" />
+    <Resource Include="Images\New Yorker Phantoms Braunschweig.png" />
+    <Resource Include="Images\Phoenix Hagen.png" />
+    <Resource Include="Images\RASTA Vechta.png" />
+    <Resource Include="Images\ratiopharm ulm.png" />
+    <Resource Include="Images\s.Oliver Baskets.png" />
+    <Resource Include="Images\TBB Trier.png" />
+    <Resource Include="Images\Telekom Baskets Bonn.png" />
+    <Resource Include="Images\WALTER TIGERS Tübingen.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

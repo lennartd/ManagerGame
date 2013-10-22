@@ -148,6 +148,7 @@ Module PublicVariablesContainer
         w.stckpnCoach.DataContext = Nothing
         w.stckpnCoach.DataContext = AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamCoach
 
+        Saved = True
         w.Close()
 
         Dim w2 As New GameWindow

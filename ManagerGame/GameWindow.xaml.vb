@@ -440,7 +440,7 @@ Public Class GameWindow
                             End If
                         End If
                         UpdateOfferLastDealtDate(i)
-                        SendEmail(AllOffers.Offers(i).OfferBiddingTeam, AllOffers.Offers(i).OfferStatus, AllOffers.Offers(i))
+                        SendEmail(AllOffers.Offers(i).OfferCurrentTeamName, AllOffers.Offers(i).OfferStatus, AllOffers.Offers(i))
                     Case 2
                         If CheckSalary(currentPlayer.PlayerRating, AllOffers.Offers(i).OfferSalary) = True Then
                             AllOffers.Offers(i).OfferStatus = 4
@@ -448,17 +448,18 @@ Public Class GameWindow
                             AllOffers.Offers(i).OfferStatus = 3
                         End If
                         UpdateOfferLastDealtDate(i)
-                        SendEmail(AllOffers.Offers(i).OfferBiddingTeam, AllOffers.Offers(i).OfferStatus, AllOffers.Offers(i))
+                        SendEmail(AllOffers.Offers(i).OfferCurrentTeamName, AllOffers.Offers(i).OfferStatus, AllOffers.Offers(i))
                 End Select
 
             End If
 
         Next
 
-        'next day
-        AllPublicProperties.PublicPropertyCurrentDate = AllPublicProperties.PublicPropertyCurrentDate.AddDays(1)
+        
 
         Dim gamesToday As Boolean = False
+        Dim gamesTomorrow As Boolean = False
+
         For i = 0 To AllDaysOfPlay.DaysOfPlay.Count - 1
 
             If AllDaysOfPlay.DaysOfPlay(i).DayOfPlayActualDate = AllPublicProperties.PublicPropertyCurrentDate Then
@@ -466,25 +467,38 @@ Public Class GameWindow
                 lstbxGamesToday.DataContext = AllDaysOfPlay.DaysOfPlay(i).DayOfPlayGames
                 gamesToday = True
             End If
+            If AllDaysOfPlay.DaysOfPlay(i).DayOfPlayActualDate = AllPublicProperties.PublicPropertyCurrentDate.AddDays(1) Then
+
+                lstbxGamesToday.DataContext = AllDaysOfPlay.DaysOfPlay(i).DayOfPlayGames
+                gamesTomorrow = True
+            End If
         Next
-        If gamesToday = False Then
+
+
+
+        If gamesTomorrow = True Then
+            For i = 0 To AllDaysOfPlay.DaysOfPlay.Count - 1
+
+                If AllDaysOfPlay.DaysOfPlay(i).DayOfPlayActualDate = AllPublicProperties.PublicPropertyCurrentDate.AddDays(1) Then
+
+                    lstbxGamesToday.DataContext = AllDaysOfPlay.DaysOfPlay(i).DayOfPlayGames
+                End If
+            Next
+        Else
             lstbxGamesToday.DataContext = Nothing
         End If
 
 
-        'show window of stats for all games
-        gamesToday = False
-        For i = 0 To AllDaysOfPlay.DaysOfPlay.Count - 1
 
-            If AllDaysOfPlay.DaysOfPlay(i).DayOfPlayActualDate = AllPublicProperties.PublicPropertyCurrentDate.AddDays(-1) Then
+        'next day
+        AllPublicProperties.PublicPropertyCurrentDate = AllPublicProperties.PublicPropertyCurrentDate.AddDays(1)
 
-                gamesToday = True
-            End If
-        Next
         If gamesToday = True Then
             Dim w As New ResultsWindow
             w.Show()
         End If
+
+
 
     End Sub
 
