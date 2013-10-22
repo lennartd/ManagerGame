@@ -222,6 +222,31 @@ Public Class SqLiteHandler
                 End Select
             End If
 
+            If rotationminutes = Nothing AndAlso Not currentteam = Nothing Then
+
+                Select Case rotationnumber
+
+                    Case 1 To 5
+                        rotationminutes = 26
+                    Case 6
+                        rotationminutes = 20
+                    Case 7
+                        rotationminutes = 15
+                    Case 8
+                        rotationminutes = 15
+                    Case 9
+                        rotationminutes = 10
+                    Case 10
+                        rotationminutes = 5
+                    Case 11
+                        rotationminutes = 5
+                    Case 12
+                        rotationminutes = 0
+                    Case Else
+                        rotationminutes = 0
+                End Select
+            End If
+
             players.Players.Add(New Player(firstname, lastname, birthday, nationality, size, weight, position, secondposition, rating, currentteam, _
                                            salary, contractuntil, rotationnumber, rotationminutes, New OffersList, pointslastgame))
         Next
