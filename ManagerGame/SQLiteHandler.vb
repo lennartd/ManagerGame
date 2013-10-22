@@ -200,6 +200,26 @@ Public Class SqLiteHandler
                             pointslastgame = datarow(j)
                         End If
                 End Select
+
+                If salary = Nothing AndAlso currentteam = Nothing Then
+                    'TODO: adapt salaryfactors
+                    Const salaryfactorunder50 As Integer = 10
+                    Const salaryfactorunder70 As Integer = 50
+                    Const salaryfactorunder85 As Integer = 65
+                    Const salaryfactorover85 As Integer = 80
+
+                    Select Case rating
+                        Case Is < 50
+                            salary = rating * salaryfactorunder50
+                        Case Is < 70
+                            salary = rating * salaryfactorunder70
+                        Case Is < 85
+                            salary = rating * salaryfactorunder85
+                        Case Else
+                            salary = rating * salaryfactorover85
+                    End Select
+                End If
+
             Next
             players.Players.Add(New Player(firstname, lastname, birthday, nationality, size, weight, position, secondposition, rating, currentteam, _
                                            salary, contractuntil, rotationnumber, rotationminutes, New OffersList, pointslastgame))
