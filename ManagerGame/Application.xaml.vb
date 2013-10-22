@@ -23,6 +23,8 @@
         AllRemainingMinutes = New RemainingMinutesList()
         AllPublicProperties = New PublicProperties()
         AllPlayersWithOffers = New PlayersList()
+        AvailableCoaches = New CoachesList()
+        AvailablePlayers = New PlayersList()
 
         '_______________________________________________________________________________________________________________________________________________
 

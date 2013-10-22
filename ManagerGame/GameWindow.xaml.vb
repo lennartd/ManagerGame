@@ -2,9 +2,12 @@
 Imports System.ComponentModel
 Imports System.Windows
 Imports System.Windows.Data
+Imports System.Collections.Specialized
 
 
 Public Class GameWindow
+
+    Dim _lstvwRotationNeedsToBeSorted As Boolean = True
 
     Private Sub GameWindow_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
 
@@ -52,8 +55,16 @@ Public Class GameWindow
 
         btnNewEmails.DataContext = AllEmails
 
+        AddHandler DirectCast(lstvwRotation.Items, INotifyCollectionChanged).CollectionChanged, AddressOf lstbxRotation_ItemsChanged
+
     End Sub
 
+    Private Sub lstbxRotation_ItemsChanged(sender As Object, e As NotifyCollectionChangedEventArgs)
+        If _lstvwRotationNeedsToBeSorted = True Then
+            _lstvwRotationNeedsToBeSorted = False
+            SortlstvwRotations()
+        End If
+    End Sub
 
 
     Private Sub SortlstvwRotations()
@@ -489,7 +500,7 @@ Public Class GameWindow
         ElseIf GetNumberOfPlayersWithMinutes() >= 12 Then
             MsgBox("Es dürfen maximal 12 Spieler deiner Mannschaft in der Rotation stehen!")
             Return False
-        ElseIf GetNumberOfGermanPlayers() <= 6 Then
+        ElseIf GetNumberOfGermanPlayers() < 6 Then
             MsgBox("Es müssen mindesten 6 Spieler in deiner Rotation Deutsche sein!")
             Return False
         ElseIf CheckIfStaringFiveHasMinutes() = False Then
@@ -516,7 +527,7 @@ Public Class GameWindow
         Dim count As Integer = 0
         For i = 0 To AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players.Count - 1
 
-            If AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationMinutes > 0 Then
+            If AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerRotationNumber <= 12 Then
                 If AllTeams.Teams(AllPublicProperties.PublicPropertyCurrentTeamIndex).TeamPlayers.Players(i).PlayerNationality = "Deutschland" Then
                     count += 1
                 End If

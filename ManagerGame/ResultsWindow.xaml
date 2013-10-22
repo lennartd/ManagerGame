@@ -16,39 +16,40 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="118*"/>
-            <ColumnDefinition Width="209*"/>
+            <ColumnDefinition Width="151*"/>
+            <ColumnDefinition Width="248*"/>
         </Grid.ColumnDefinitions>
 
 
-        <StackPanel Margin="15,5,5,5">
-            <Label FontSize="16">Spiele gestern</Label>
-            <ListBox Name="lstbxGamesToday" ItemsSource="{Binding Games}" >
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="15,5,5,5">
+                <Label FontSize="16">Spiele gestern</Label>
+                <ListBox Name="lstbxGamesToday" ItemsSource="{Binding Games}" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
 
-                        <Border BorderBrush="Red" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <Border.BorderThickness>
-                                <MultiBinding StringFormat="{} {0} {1}" Converter="{StaticResource GamesFontWeightConv}">
-                                    <Binding Path="GameOpponentHome"/>
-                                    <Binding Path="GameOpponentGuest"/>
-                                </MultiBinding>
-                            </Border.BorderThickness>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                <Image Source="{Binding GameOpponentHome, Converter={StaticResource GameOpponentImageConv}}"
-                                               Width="100" Margin="0,0,0,5"></Image>
-                                <Label FontSize="25" HorizontalAlignment="Center" Margin="0,20,0,5">vs.</Label>
-                                <Image Source="{Binding GameOpponentGuest, Converter={StaticResource GameOpponentImageConv}}"
-                                               Width="100" Margin="5,0,0,5"></Image>
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </StackPanel>
-
+                            <Border BorderBrush="Red" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Border.BorderThickness>
+                                    <MultiBinding StringFormat="{} {0} {1}" Converter="{StaticResource GamesFontWeightConv}">
+                                        <Binding Path="GameOpponentHome"/>
+                                        <Binding Path="GameOpponentGuest"/>
+                                    </MultiBinding>
+                                </Border.BorderThickness>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                    <Image Source="{Binding GameOpponentHome, Converter={StaticResource GameOpponentImageConv}}"
+                                                   Width="100" Margin="0,0,0,5"></Image>
+                                    <Label FontSize="25" HorizontalAlignment="Center" Margin="0,20,0,5">vs.</Label>
+                                    <Image Source="{Binding GameOpponentGuest, Converter={StaticResource GameOpponentImageConv}}"
+                                                   Width="100" Margin="5,0,0,5"></Image>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </ScrollViewer>
         <Grid Name="grdGame" Grid.Column="1" Margin="40,5,5,5">
-                
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -57,9 +58,9 @@
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
 
-            
+
                 <Grid>
-                    
+
                     <Label Name="lblSelectedGame" Content="{Binding}" HorizontalAlignment="Center">
                         <Label.ContentTemplate>
                             <DataTemplate>
@@ -76,7 +77,7 @@
                         </Label.ContentTemplate>
                     </Label>
                 </Grid>
-                
+
                 <ComboBox Name="cmbbxChooseTeam" Grid.Row="1" Width="100" Margin="5" HorizontalAlignment="Right">
                     <ComboBoxItem Content="Heim"/>
                     <ComboBoxItem Content="Auswärts"/>
@@ -114,8 +115,8 @@
                     </ItemsControl>
 
                 </Grid>
-                
-                
+
+
                 <!--<ListBox Grid.Row="3" Name="lstbxStats" ItemsSource="{Binding Players}">
             
                     <ListBox.ItemTemplate>
@@ -133,7 +134,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>-->
-            
+
             </Grid>
 
         </Grid>
