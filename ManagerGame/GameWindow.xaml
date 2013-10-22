@@ -124,32 +124,35 @@
                 </StackPanel>
 
                 <Grid Grid.Row="2" Grid.ColumnSpan="2">
-
-                    <StackPanel Margin="15,5,5,5">
-                        <Label FontSize="16">Spiele heute</Label>
-                        <ItemsControl Name="lstbxGamesToday" ItemsSource="{Binding Games}" >
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,15,2,0">
+                        <StackPanel Margin="15,5,5,5">
+                            <Label FontSize="16">Spiele heute</Label>
+                            <ItemsControl Name="lstbxGamesToday" ItemsSource="{Binding Games}" >
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
                                 
-                                    <Border BorderBrush="Red" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                        <Border.BorderThickness>
-                                            <MultiBinding StringFormat="{} {0} {1}" Converter="{StaticResource GamesFontWeightConv}">
-                                                <Binding Path="GameOpponentHome"/>
-                                                <Binding Path="GameOpponentGuest"/>
-                                            </MultiBinding>
-                                        </Border.BorderThickness>
-                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                            <Image Source="{Binding GameOpponentHome, Converter={StaticResource GameOpponentImageConv}}"
-                                               Width="100" Margin="0,0,0,5"></Image>
-                                            <Label FontSize="25" HorizontalAlignment="Center" Margin="0,20,0,5">vs.</Label>
-                                            <Image Source="{Binding GameOpponentGuest, Converter={StaticResource GameOpponentImageConv}}"
-                                               Width="100" Margin="5,0,0,5"></Image>
-                                        </StackPanel>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
+                                        <Border BorderBrush="Red" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <Border.BorderThickness>
+                                                <MultiBinding StringFormat="{} {0} {1}" Converter="{StaticResource GamesFontWeightConv}">
+                                                    <Binding Path="GameOpponentHome"/>
+                                                    <Binding Path="GameOpponentGuest"/>
+                                                </MultiBinding>
+                                            </Border.BorderThickness>
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                <Image Source="{Binding GameOpponentHome, Converter={StaticResource GameOpponentImageConv}}"
+                                                   Width="100" Margin="0,0,0,5"></Image>
+                                                <Label FontSize="25" HorizontalAlignment="Center" Margin="0,20,0,5">vs.</Label>
+                                                <Image Source="{Binding GameOpponentGuest, Converter={StaticResource GameOpponentImageConv}}"
+                                                   Width="100" Margin="5,0,0,5"></Image>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+      
+                        </StackPanel>
+                    </ScrollViewer>
+                    
                 </Grid>
 
             </Grid>
