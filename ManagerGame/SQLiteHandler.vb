@@ -65,11 +65,11 @@ Public Class SqLiteHandler
 
     Private Sub GetAllPublicProperties(ByVal result As DataTable)
 
-        Dim currentdate As Date = Nothing
-
         Dim publicproperties As PublicProperties = New PublicProperties()
 
         For Each datarow As DataRow In result.Rows
+
+            Dim currentdate As Date = Nothing
 
             For j = 0 To result.Columns.Count - 1
 
@@ -85,12 +85,12 @@ Public Class SqLiteHandler
 
     Private Sub GetAllDaysOfPlay(ByVal result As DataTable)
 
-        Dim number As Integer = Nothing
-        Dim actualdate As Date = Nothing
-
         Dim daysofplay As DaysOfPlayList = New DaysOfPlayList()
 
         For Each datarow As DataRow In result.Rows
+
+            Dim number As Integer = Nothing
+            Dim actualdate As Date = Nothing
 
             For j = 0 To result.Columns.Count - 1
 
@@ -132,25 +132,25 @@ Public Class SqLiteHandler
 
     Private Sub GetAllPlayers(ByVal result As DataTable)
 
-        Dim firstname As String = Nothing
-        Dim lastname As String = Nothing
-        Dim birthday As String = Nothing
-        Dim nationality As String = Nothing
-        Dim size As Integer = Nothing
-        Dim weight As Integer = Nothing
-        Dim position As String = Nothing
-        Dim secondposition As String = Nothing
-        Dim rating As Integer = Nothing
-        Dim currentteam As String = Nothing
-        Dim salary As Integer = Nothing
-        Dim contractuntil As Integer = Nothing
-        Dim rotationnumber As Integer = Nothing
-        Dim rotationminutes As Integer = Nothing
-        Dim pointslastgame As Integer = Nothing
-
         Dim players As PlayersList = New PlayersList()
 
         For Each datarow As DataRow In result.Rows
+
+            Dim firstname As String = Nothing
+            Dim lastname As String = Nothing
+            Dim birthday As String = Nothing
+            Dim nationality As String = Nothing
+            Dim size As Integer = Nothing
+            Dim weight As Integer = Nothing
+            Dim position As String = Nothing
+            Dim secondposition As String = Nothing
+            Dim rating As Integer = Nothing
+            Dim currentteam As String = Nothing
+            Dim salary As Integer = Nothing
+            Dim contractuntil As Integer = Nothing
+            Dim rotationnumber As Integer = Nothing
+            Dim rotationminutes As Integer = Nothing
+            Dim pointslastgame As Integer = Nothing
 
             For j = 0 To result.Columns.Count - 1
 
@@ -201,26 +201,27 @@ Public Class SqLiteHandler
                         End If
                 End Select
 
-                If salary = Nothing AndAlso currentteam = Nothing Then
-                    'TODO: adapt salaryfactors
-                    Const salaryfactorunder50 As Integer = 10
-                    Const salaryfactorunder70 As Integer = 50
-                    Const salaryfactorunder85 As Integer = 65
-                    Const salaryfactorover85 As Integer = 80
-
-                    Select Case rating
-                        Case Is < 50
-                            salary = rating * salaryfactorunder50
-                        Case Is < 70
-                            salary = rating * salaryfactorunder70
-                        Case Is < 85
-                            salary = rating * salaryfactorunder85
-                        Case Else
-                            salary = rating * salaryfactorover85
-                    End Select
-                End If
-
             Next
+
+            If salary = Nothing AndAlso Not currentteam = Nothing Then
+                'TODO: adapt salaryfactors
+                Const salaryfactorunder50 As Integer = 10
+                Const salaryfactorunder70 As Integer = 50
+                Const salaryfactorunder85 As Integer = 65
+                Const salaryfactorover85 As Integer = 80
+
+                Select Case rating
+                    Case Is < 50
+                        salary = rating * salaryfactorunder50
+                    Case Is < 70
+                        salary = rating * salaryfactorunder70
+                    Case Is < 85
+                        salary = rating * salaryfactorunder85
+                    Case Else
+                        salary = rating * salaryfactorover85
+                End Select
+            End If
+
             players.Players.Add(New Player(firstname, lastname, birthday, nationality, size, weight, position, secondposition, rating, currentteam, _
                                            salary, contractuntil, rotationnumber, rotationminutes, New OffersList, pointslastgame))
         Next
@@ -237,12 +238,12 @@ Public Class SqLiteHandler
 
     Private Sub GetGames(ByVal result As DataTable, ByVal number As Integer)
 
-        Dim opponenthome As String = Nothing
-        Dim opponentguest As String = Nothing
-
         Dim games As GamesList = New GamesList()
 
         For Each datarow As DataRow In result.Rows
+
+            Dim opponenthome As String = Nothing
+            Dim opponentguest As String = Nothing
 
             For j = 0 To result.Columns.Count - 1
 
@@ -301,15 +302,15 @@ Public Class SqLiteHandler
 
     Private Sub GetAllTeams(ByVal result As DataTable)
 
-        Dim name As String = Nothing
-        Dim money As Integer = Nothing
-        Dim wins As Integer = Nothing
-        Dim losses As Integer = Nothing
-        Dim additionalsalary As Integer = Nothing
-
         Dim teams As TeamsList = New TeamsList()
 
         For Each datarow As DataRow In result.Rows
+
+            Dim name As String = Nothing
+            Dim money As Integer = Nothing
+            Dim wins As Integer = Nothing
+            Dim losses As Integer = Nothing
+            Dim additionalsalary As Integer = Nothing
 
             For j = 0 To result.Columns.Count - 1
 
@@ -354,17 +355,17 @@ Public Class SqLiteHandler
 
     Private Sub GetAllCoaches(ByVal result As DataTable)
 
-        Dim firstname As String = Nothing
-        Dim lastname As String = Nothing
-        Dim birthday As String = Nothing
-        Dim nationality As String = Nothing
-        Dim rating As Integer = Nothing
-        Dim currentteam As String = Nothing
-        Dim salary As Integer = Nothing
-
         Dim coaches As CoachesList = New CoachesList()
 
         For Each datarow As DataRow In result.Rows
+
+            Dim firstname As String = Nothing
+            Dim lastname As String = Nothing
+            Dim birthday As String = Nothing
+            Dim nationality As String = Nothing
+            Dim rating As Integer = Nothing
+            Dim currentteam As String = Nothing
+            Dim salary As Integer = Nothing
 
             For j = 0 To result.Columns.Count - 1
 
